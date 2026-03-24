@@ -13,6 +13,7 @@
     --border: #222222;
     --accent: #e8ff47;
     --accent2: #ff4747;
+    --accent3: #47b8ff;
     --text: #e8e8e8;
     --muted: #555555;
     --font-mono: 'Space Mono', monospace;
@@ -30,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* ── HEADER ── */
   header {
     border-bottom: 1px solid var(--border);
     padding: 20px 32px;
@@ -43,489 +43,179 @@
     z-index: 100;
   }
 
-  .logo {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-  }
-
+  .logo { font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); }
   .logo span { color: var(--muted); }
+  .header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .count-badge { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 
-  .header-actions { display: flex; gap: 10px; align-items: center; }
-
-  .count-badge {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-
-  /* ── BUTTONS ── */
   button {
-    cursor: pointer;
-    border: none;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    font-weight: 700;
+    cursor: pointer; border: none;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; font-weight: 700;
     transition: all 0.15s;
   }
 
-  .btn-primary {
-    background: var(--accent);
-    color: #000;
-    padding: 9px 18px;
-  }
+  .btn-primary { background: var(--accent); color: #000; padding: 9px 18px; }
   .btn-primary:hover { background: #d4eb20; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--muted);
-    padding: 9px 14px;
-    border: 1px solid var(--border);
-  }
+  .btn-bulk { background: transparent; color: var(--accent3); padding: 9px 18px; border: 1px solid var(--accent3); }
+  .btn-bulk:hover { background: rgba(71,184,255,0.08); }
+  .btn-bulk:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-ghost { background: transparent; color: var(--muted); padding: 9px 14px; border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
 
-  .btn-danger {
-    background: transparent;
-    color: var(--accent2);
-    padding: 6px 12px;
-    border: 1px solid var(--accent2);
-    font-size: 10px;
-  }
-  .btn-danger:hover { background: var(--accent2); color: #fff; }
-
-  .btn-dl {
-    background: var(--surface2);
-    color: var(--text);
-    padding: 7px 14px;
-    border: 1px solid var(--border);
-    width: 100%;
-    margin-top: 6px;
-    font-size: 10px;
-  }
+  .btn-dl { background: var(--surface2); color: var(--text); padding: 7px 14px; border: 1px solid var(--border); width: 100%; margin-top: 6px; font-size: 10px; }
   .btn-dl:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* ── LAYOUT ── */
-  .app {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    min-height: calc(100vh - 61px);
-  }
+  .btn-del { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 7px 10px; font-size: 11px; flex-shrink: 0; }
+  .btn-del:hover { border-color: var(--accent2); color: var(--accent2); }
 
-  /* ── SIDEBAR ── */
+  .app { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 61px); }
+
   aside {
     border-right: 1px solid var(--border);
     padding: 24px 20px;
-    position: sticky;
-    top: 61px;
+    position: sticky; top: 61px;
     height: calc(100vh - 61px);
     overflow-y: auto;
   }
 
-  .sidebar-label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-
-  .filter-item {
-    padding: 7px 10px;
-    cursor: pointer;
-    border-radius: 2px;
-    font-size: 13px;
-    color: var(--muted);
-    transition: all 0.1s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .filter-item:hover { color: var(--text); background: var(--surface); }
-  .filter-item.active { color: var(--accent); background: var(--surface); }
-
-  .filter-count {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--muted);
-  }
-
+  .sidebar-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; }
   .sidebar-section { margin-bottom: 28px; }
 
-  /* ── MAIN ── */
+  .filter-item { padding: 7px 10px; cursor: pointer; border-radius: 2px; font-size: 13px; color: var(--muted); transition: all 0.1s; display: flex; justify-content: space-between; align-items: center; }
+  .filter-item:hover { color: var(--text); background: var(--surface); }
+  .filter-item.active { color: var(--accent); background: var(--surface); }
+  .filter-count { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+
   main { padding: 28px 32px; }
 
-  .main-toolbar {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-
-  .search-wrap {
-    flex: 1;
-    position: relative;
-  }
-
-  .search-wrap input {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 9px 12px 9px 36px;
-    font-family: var(--font-body);
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
+  .main-toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; }
+  .search-wrap { flex: 1; position: relative; }
+  .search-wrap input { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 9px 12px 9px 36px; font-family: var(--font-body); font-size: 13px; outline: none; transition: border-color 0.15s; }
   .search-wrap input:focus { border-color: var(--muted); }
   .search-wrap input::placeholder { color: var(--muted); }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; pointer-events: none; }
 
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-    font-size: 13px;
-    pointer-events: none;
-  }
+  .clip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
-  /* ── CLIP GRID ── */
-  .clip-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
-
-  .clip-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
-    animation: fadeIn 0.3s ease;
-  }
+  .clip-card { background: var(--surface); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.2s, transform 0.2s; animation: fadeIn 0.3s ease; }
   .clip-card:hover { border-color: #333; transform: translateY(-2px); }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-  .clip-thumb {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #000;
-    overflow: hidden;
-  }
+  .clip-thumb { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; cursor: pointer; }
+  .clip-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .clip-thumb video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .scene-badge {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background: rgba(0,0,0,0.8);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    padding: 3px 7px;
-    text-transform: uppercase;
-  }
+  .scene-badge { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.8); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--accent); padding: 3px 7px; text-transform: uppercase; }
 
   .clip-body { padding: 14px; }
-
-  .clip-anime {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .clip-name {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-
-  .clip-char {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .clip-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 10px;
-  }
-
-  .tag {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    color: var(--muted);
-    padding: 2px 7px;
-    letter-spacing: 0.08em;
-  }
-
+  .clip-anime { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+  .clip-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; line-height: 1.3; }
+  .clip-char { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .clip-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .tag { background: var(--surface2); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 9px; color: var(--muted); padding: 2px 7px; letter-spacing: 0.08em; }
   .clip-actions { display: flex; gap: 8px; }
-
   .clip-actions .btn-dl { margin-top: 0; }
 
-  .btn-del {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 7px 10px;
-    font-size: 11px;
-    flex-shrink: 0;
-  }
-  .btn-del:hover { border-color: var(--accent2); color: var(--accent2); }
-
-  /* ── EMPTY STATE ── */
-  .empty {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 80px 20px;
-    color: var(--muted);
-  }
+  .empty { grid-column: 1/-1; text-align: center; padding: 80px 20px; color: var(--muted); }
   .empty .empty-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.3; }
   .empty h3 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.15em; margin-bottom: 8px; color: var(--text); }
   .empty p { font-size: 12px; line-height: 1.6; }
 
-  /* ── MODAL ── */
-  .modal-bg {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 200;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 40px 20px;
-    overflow-y: auto;
-  }
+  /* ── MODALS ── */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto; }
   .modal-bg.open { display: flex; }
 
-  .modal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    width: 100%;
-    max-width: 520px;
-    padding: 32px;
-    animation: slideUp 0.25s ease;
-  }
+  .modal { background: var(--surface); border: 1px solid var(--border); width: 100%; max-width: 520px; padding: 32px; animation: slideUp 0.25s ease; }
+  .modal-wide { max-width: 780px; }
 
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
-  .modal-title {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    margin-bottom: 24px;
-    text-transform: uppercase;
-  }
+  .modal-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 24px; text-transform: uppercase; }
+  .modal-title.bulk { color: var(--accent3); }
 
   .form-row { margin-bottom: 16px; }
-
-  .form-row label {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-
-  .form-row input,
-  .form-row select {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 9px 12px;
-    font-family: var(--font-body);
-    font-size: 13px;
-    outline: none;
-    transition: border-color 0.15s;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  .form-row input:focus,
-  .form-row select:focus { border-color: var(--accent); }
-
+  .form-row label { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; }
+  .form-row input, .form-row select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 9px 12px; font-family: var(--font-body); font-size: 13px; outline: none; transition: border-color 0.15s; -webkit-appearance: none; appearance: none; }
+  .form-row input:focus, .form-row select:focus { border-color: var(--accent); }
   .form-row select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
 
-  /* ── DROP ZONE ── */
-  .drop-zone {
-    border: 1px dashed var(--border);
-    padding: 32px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--bg);
-  }
-  .drop-zone:hover,
-  .drop-zone.drag-over { border-color: var(--accent); background: rgba(232,255,71,0.03); }
+  .drop-zone { border: 1px dashed var(--border); padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg); }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: rgba(232,255,71,0.03); }
+  .drop-zone.has-file { border-style: solid; border-color: #2a2a2a; }
+  .drop-zone.bulk-zone { border-color: rgba(71,184,255,0.25); }
+  .drop-zone.bulk-zone:hover, .drop-zone.bulk-zone.drag-over { border-color: var(--accent3); background: rgba(71,184,255,0.04); }
 
-  .drop-zone.has-file { border-color: #2a2a2a; border-style: solid; }
+  .drop-icon { font-size: 26px; margin-bottom: 8px; opacity: 0.4; }
+  .drop-text { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted); }
+  .drop-subtext { font-family: var(--font-mono); font-size: 9px; color: var(--muted); opacity: 0.5; margin-top: 4px; }
+  .drop-file-name { font-family: var(--font-mono); font-size: 11px; color: var(--accent); margin-top: 6px; }
 
-  .drop-icon { font-size: 28px; margin-bottom: 10px; opacity: 0.4; }
+  /* ── BULK QUEUE ── */
+  .bulk-queue { margin-top: 14px; border: 1px solid var(--border); max-height: 280px; overflow-y: auto; display: none; }
+  .bulk-queue.has-files { display: block; }
 
-  .drop-text {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-  }
+  .queue-header { display: grid; grid-template-columns: 1fr 150px 32px; gap: 8px; padding: 7px 12px; border-bottom: 1px solid var(--border); background: var(--surface2); }
+  .queue-header span { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
 
-  .drop-file-name {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--accent);
-    margin-top: 6px;
-  }
+  .queue-item { display: grid; grid-template-columns: 1fr 150px 32px; gap: 8px; padding: 7px 12px; border-bottom: 1px solid var(--border); align-items: center; }
+  .queue-item:last-child { border-bottom: none; }
+  .queue-item.uploading { background: rgba(71,184,255,0.04); }
+  .queue-item.done      { background: rgba(232,255,71,0.03); }
+  .queue-item.failed    { background: rgba(255,71,71,0.04); }
 
-  #drop-input { display: none; }
+  .queue-name-input { background: transparent; border: none; border-bottom: 1px solid transparent; color: var(--text); font-family: var(--font-body); font-size: 12px; padding: 2px 4px; width: 100%; outline: none; transition: border-color 0.15s; }
+  .queue-name-input:focus { border-bottom-color: var(--accent3); }
+  .queue-name-input:disabled { opacity: 0.45; }
 
-  /* ── UPLOAD PROGRESS ── */
-  .upload-status {
-    display: none;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 12px;
-    letter-spacing: 0.08em;
-  }
+  .queue-status { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.07em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .queue-status.uploading { color: var(--accent3); }
+  .queue-status.done      { color: var(--accent); }
+  .queue-status.failed    { color: var(--accent2); }
+
+  .queue-remove { background: none; border: none; color: var(--muted); font-size: 12px; padding: 2px 6px; cursor: pointer; font-family: var(--font-mono); }
+  .queue-remove:hover { color: var(--accent2); }
+  .queue-remove:disabled { opacity: 0.15; cursor: not-allowed; }
+
+  /* ── OVERALL PROGRESS ── */
+  .bulk-overall { display: none; margin-top: 16px; }
+  .bulk-overall.visible { display: block; }
+  .bulk-overall-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .bulk-overall-label span { color: var(--accent3); }
+  .bulk-bar-wrap { height: 2px; background: var(--border); }
+  .bulk-bar { height: 100%; background: var(--accent3); width: 0%; transition: width 0.35s; }
+
+  /* ── SINGLE PROGRESS ── */
+  .upload-status { display: none; font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 12px; letter-spacing: 0.08em; }
   .upload-status.visible { display: block; }
   .upload-status.success { color: var(--accent); }
-  .upload-status.error { color: var(--accent2); }
-
-  .progress-bar-wrap {
-    height: 2px;
-    background: var(--border);
-    margin-top: 8px;
-    overflow: hidden;
-    display: none;
-  }
+  .upload-status.error   { color: var(--accent2); }
+  .progress-bar-wrap { height: 2px; background: var(--border); margin-top: 8px; display: none; }
   .progress-bar-wrap.visible { display: block; }
+  .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
 
-  .progress-bar {
-    height: 100%;
-    background: var(--accent);
-    width: 0%;
-    transition: width 0.3s;
-  }
+  .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); align-items: center; }
+  .modal-footer-info { flex: 1; font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
 
-  /* ── MODAL FOOTER ── */
-  .modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    padding: 12px 20px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    z-index: 300;
-    animation: fadeIn 0.2s ease;
-    max-width: 320px;
-    line-height: 1.5;
-  }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface2); border: 1px solid var(--border); padding: 12px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; z-index: 300; animation: fadeIn 0.2s ease; max-width: 340px; line-height: 1.5; }
   .toast.success { border-left: 3px solid var(--accent); }
-  .toast.error { border-left: 3px solid var(--accent2); color: var(--accent2); }
+  .toast.error   { border-left: 3px solid var(--accent2); color: var(--accent2); }
+  .toast.info    { border-left: 3px solid var(--accent3); }
 
-  /* ── EXPORT BAR ── */
-  .export-bar {
-    border-top: 1px solid var(--border);
-    padding: 12px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    background: var(--bg);
-  }
-  .export-bar span {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+  .export-bar { border-top: 1px solid var(--border); padding: 12px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; background: var(--bg); }
+  .export-bar span { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
 
-  /* ── VIDEO MODAL ── */
-  .video-modal-bg {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 250;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-  }
+  .video-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 250; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
   .video-modal-bg.open { display: flex; }
-
-  .video-modal-bg video {
-    max-width: 90vw;
-    max-height: 75vh;
-    outline: none;
-  }
-
-  .video-modal-close {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 8px 16px;
-  }
+  .video-modal-bg video { max-width: 90vw; max-height: 75vh; outline: none; }
+  .video-modal-close { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--muted); cursor: pointer; background: none; border: none; padding: 8px 16px; }
   .video-modal-close:hover { color: var(--text); }
+  .video-modal-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: var(--accent); }
 
-  .video-modal-title {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-  }
-
-  /* scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); }
@@ -535,6 +225,7 @@
     aside { display: none; }
     header { padding: 16px; }
     main { padding: 16px; }
+    .form-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -544,7 +235,8 @@
   <div class="logo">CLIP<span>_</span>VAULT</div>
   <div class="header-actions">
     <span class="count-badge" id="clip-count">0 CLIPS</span>
-    <button class="btn-ghost" onclick="exportJSON()">EXPORT JSON</button>
+    <button class="btn-ghost"   onclick="exportJSON()">EXPORT JSON</button>
+    <button class="btn-bulk"    onclick="openBulkModal()">⬆ BULK IMPORT</button>
     <button class="btn-primary" onclick="openModal()">+ ADD CLIP</button>
   </div>
 </header>
@@ -582,8 +274,8 @@
   <button class="btn-ghost" onclick="exportJSON()">⬇ EXPORT clips.json</button>
 </div>
 
-<!-- ADD CLIP MODAL -->
-<div class="modal-bg" id="add-modal" onclick="handleModalBgClick(event)">
+<!-- ══ SINGLE ADD MODAL ══ -->
+<div class="modal-bg" id="add-modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-title">// ADD NEW CLIP</div>
 
@@ -592,51 +284,44 @@
       <input type="text" id="f-anime" placeholder="e.g. Naruto" list="anime-datalist">
       <datalist id="anime-datalist"></datalist>
     </div>
-
-    <div class="form-row">
-      <label>Scene Type</label>
-      <select id="f-scene">
-        <option value="">Select type...</option>
-        <option>Action</option>
-        <option>Emotional</option>
-        <option>Funny</option>
-        <option>Romance</option>
-        <option>Plot Twist</option>
-        <option>Training</option>
-        <option>Death</option>
-        <option>Transformation</option>
-        <option>Other</option>
-      </select>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Scene Type</label>
+        <select id="f-scene">
+          <option value="">Select type...</option>
+          <option>Action</option><option>Emotional</option><option>Funny</option>
+          <option>Romance</option><option>Plot Twist</option><option>Training</option>
+          <option>Death</option><option>Transformation</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Character</label>
+        <input type="text" id="f-char" placeholder="e.g. Itachi" list="char-datalist">
+        <datalist id="char-datalist"></datalist>
+      </div>
     </div>
-
-    <div class="form-row">
-      <label>Character</label>
-      <input type="text" id="f-char" placeholder="e.g. Itachi" list="char-datalist">
-      <datalist id="char-datalist"></datalist>
-    </div>
-
     <div class="form-row">
       <label>Clip Name</label>
       <input type="text" id="f-name" placeholder="e.g. Itachi kills Rin">
     </div>
-
     <div class="form-row">
       <label>Tags (comma-separated)</label>
       <input type="text" id="f-tags" placeholder="e.g. sharingan, uchiha, sad">
     </div>
-
     <div class="form-row">
       <label>Video File</label>
-      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('drop-input').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+      <div class="drop-zone" id="drop-zone"
+        onclick="document.getElementById('drop-input').click()"
+        ondrop="handleSingleDrop(event)"
+        ondragover="dzOver(event,'drop-zone')"
+        ondragleave="dzLeave('drop-zone')">
         <div class="drop-icon">⬆</div>
         <div class="drop-text">DRAG & DROP VIDEO OR CLICK TO BROWSE</div>
         <div class="drop-file-name" id="drop-file-name"></div>
       </div>
-      <input type="file" id="drop-input" accept="video/*" onchange="handleFileSelect(event)">
+      <input type="file" id="drop-input" accept="video/*" onchange="handleFileSelect(event)" style="display:none">
       <div class="upload-status" id="upload-status"></div>
-      <div class="progress-bar-wrap" id="progress-wrap">
-        <div class="progress-bar" id="progress-bar"></div>
-      </div>
+      <div class="progress-bar-wrap" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
     </div>
 
     <div class="modal-footer">
@@ -646,7 +331,75 @@
   </div>
 </div>
 
-<!-- VIDEO PREVIEW MODAL -->
+<!-- ══ BULK IMPORT MODAL ══ -->
+<div class="modal-bg" id="bulk-modal" onclick="if(event.target===this&&!bulkRunning)closeBulkModal()">
+  <div class="modal modal-wide">
+    <div class="modal-title bulk">// BULK IMPORT</div>
+
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Anime <span style="color:var(--accent2)">*</span></label>
+        <input type="text" id="b-anime" placeholder="e.g. Naruto" list="anime-datalist">
+      </div>
+      <div class="form-row">
+        <label>Scene Type <span style="color:var(--accent2)">*</span></label>
+        <select id="b-scene">
+          <option value="">Select type...</option>
+          <option>Action</option><option>Emotional</option><option>Funny</option>
+          <option>Romance</option><option>Plot Twist</option><option>Training</option>
+          <option>Death</option><option>Transformation</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Character <span style="color:var(--accent2)">*</span></label>
+        <input type="text" id="b-char" placeholder="e.g. Itachi" list="char-datalist">
+      </div>
+      <div class="form-row">
+        <label>Tags (applied to all)</label>
+        <input type="text" id="b-tags" placeholder="e.g. uchiha, action">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Videos — drop a folder or select multiple files</label>
+      <div class="drop-zone bulk-zone" id="bulk-drop-zone"
+        onclick="document.getElementById('bulk-input').click()"
+        ondrop="handleBulkDrop(event)"
+        ondragover="dzOver(event,'bulk-drop-zone')"
+        ondragleave="dzLeave('bulk-drop-zone')">
+        <div class="drop-icon">📂</div>
+        <div class="drop-text">DROP FOLDER OR MULTIPLE FILES HERE</div>
+        <div class="drop-subtext">OR CLICK TO BROWSE — SUPPORTS MP4, MKV, MOV, WEBM, AVI & MORE</div>
+      </div>
+      <input type="file" id="bulk-input" accept="video/*" multiple onchange="handleBulkSelect(event)" style="display:none">
+    </div>
+
+    <div class="bulk-queue" id="bulk-queue">
+      <div class="queue-header">
+        <span>Clip Name (click to edit)</span>
+        <span>Status</span>
+        <span></span>
+      </div>
+      <div id="queue-list"></div>
+    </div>
+
+    <div class="bulk-overall" id="bulk-overall">
+      <div class="bulk-overall-label">
+        <span>UPLOADING TO CATBOX.MOE</span>
+        <span id="bulk-progress-label">0 / 0</span>
+      </div>
+      <div class="bulk-bar-wrap"><div class="bulk-bar" id="bulk-bar"></div></div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="modal-footer-info" id="bulk-footer-info"></div>
+      <button class="btn-ghost" id="bulk-cancel-btn" onclick="closeBulkModal()">CANCEL</button>
+      <button class="btn-bulk"  id="bulk-submit-btn" onclick="submitBulk()">⬆ UPLOAD ALL</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VIDEO PREVIEW MODAL ══ -->
 <div class="video-modal-bg" id="video-modal" onclick="closeVideoModal()">
   <div class="video-modal-title" id="video-modal-title"></div>
   <video id="video-player" controls onclick="event.stopPropagation()"></video>
@@ -654,291 +407,212 @@
 </div>
 
 <script>
-// ── STATE ──
+// ══ STATE ══
 let clips = [];
 let selectedFile = null;
-let catboxUrl = null;
 let activeFilters = { anime: null, char: null, scene: null };
+let bulkQueue  = [];   // [{ file, name, status, url, error }]
+let bulkRunning = false;
 
-// catbox.moe blocks direct requests from file:// and some origins.
-// We route through corsproxy.io so it works locally AND on GitHub Pages.
-const CATBOX_API        = 'https://catbox.moe/user/api.php';
-const CATBOX_API_PROXY  = 'https://corsproxy.io/?' + encodeURIComponent('https://catbox.moe/user/api.php');
+const CATBOX_DIRECT = 'https://catbox.moe/user/api.php';
+const CATBOX_PROXY  = 'https://corsproxy.io/?' + encodeURIComponent('https://catbox.moe/user/api.php');
 
-// ── INIT ──
+// ══ INIT ══
 (async function init() {
-  // Try to load clips.json from same directory (for GitHub deploy)
   try {
     const res = await fetch('./clips.json');
     if (res.ok) {
-      const data = await res.json();
-      clips = Array.isArray(data) ? data : [];
-      toast('Loaded clips.json from server', 'success');
+      const d = await res.json();
+      clips = Array.isArray(d) ? d : [];
+      toast('Loaded clips.json', 'success');
     }
-  } catch (_) {}
+  } catch(_) {}
 
-  // Merge with localStorage
-  const local = localStorage.getItem('clipvault');
-  if (local) {
-    const parsed = JSON.parse(local);
-    // Merge: localStorage wins for same IDs
-    const map = new Map(clips.map(c => [c.id, c]));
-    parsed.forEach(c => map.set(c.id, c));
-    clips = [...map.values()];
-  }
+  try {
+    const local = localStorage.getItem('clipvault');
+    if (local) {
+      const parsed = JSON.parse(local);
+      const map = new Map(clips.map(c => [c.id, c]));
+      parsed.forEach(c => map.set(c.id, c));
+      clips = [...map.values()];
+    }
+  } catch(_) {}
 
   render();
 })();
 
-function save() {
-  localStorage.setItem('clipvault', JSON.stringify(clips));
-}
+function save() { localStorage.setItem('clipvault', JSON.stringify(clips)); }
 
-// ── RENDER ──
+// ══ RENDER ══
 function render() {
   renderFilters();
   renderClips();
   document.getElementById('clip-count').textContent = clips.length + ' CLIPS';
-  // Update datalists
   const animes = [...new Set(clips.map(c => c.anime))];
   const chars  = [...new Set(clips.map(c => c.character))];
-  document.getElementById('anime-datalist').innerHTML = animes.map(a => `<option value="${a}">`).join('');
-  document.getElementById('char-datalist').innerHTML  = chars.map(c  => `<option value="${c}">`).join('');
+  document.getElementById('anime-datalist').innerHTML = animes.map(a => `<option value="${h(a)}">`).join('');
+  document.getElementById('char-datalist').innerHTML  = chars.map(c  => `<option value="${h(c)}">`).join('');
 }
 
 function renderFilters() {
-  const animeCounts = groupCount(clips, 'anime');
-  const charCounts  = groupCount(clips, 'character');
-  const sceneCounts = groupCount(clips, 'scene');
-
-  const af = document.getElementById('anime-filters');
-  const cf = document.getElementById('char-filters');
-  const sf = document.getElementById('scene-filters');
-
-  af.innerHTML = makeFilterHTML(animeCounts, 'anime');
-  cf.innerHTML = makeFilterHTML(charCounts,  'char');
-  sf.innerHTML = makeFilterHTML(sceneCounts, 'scene');
+  document.getElementById('anime-filters').innerHTML = mkFilters(groupCount(clips,'anime'), 'anime');
+  document.getElementById('char-filters').innerHTML  = mkFilters(groupCount(clips,'character'), 'char');
+  document.getElementById('scene-filters').innerHTML = mkFilters(groupCount(clips,'scene'), 'scene');
 }
 
 function groupCount(arr, key) {
-  const map = {};
-  arr.forEach(c => { map[c[key]] = (map[c[key]] || 0) + 1; });
-  return Object.entries(map).sort((a,b) => b[1]-a[1]);
+  const m = {};
+  arr.forEach(c => m[c[key]] = (m[c[key]]||0)+1);
+  return Object.entries(m).sort((a,b)=>b[1]-a[1]);
 }
 
-function makeFilterHTML(entries, type) {
+function mkFilters(entries, type) {
   if (!entries.length) return `<div class="filter-item" style="opacity:.3;font-size:11px">—</div>`;
-  return entries.map(([val, count]) => {
-    const active = activeFilters[type] === val ? 'active' : '';
-    return `<div class="filter-item ${active}" onclick="toggleFilter('${type}','${escAttr(val)}')">${escHTML(val)}<span class="filter-count">${count}</span></div>`;
-  }).join('');
+  return entries.map(([v,n]) =>
+    `<div class="filter-item ${activeFilters[type]===v?'active':''}" onclick="toggleFilter('${type}','${a(v)}')">${h(v)}<span class="filter-count">${n}</span></div>`
+  ).join('');
 }
 
 function toggleFilter(type, val) {
   activeFilters[type] = activeFilters[type] === val ? null : val;
-  renderFilters();
-  renderClips();
+  renderFilters(); renderClips();
 }
 
 function clearFilters() {
   activeFilters = { anime: null, char: null, scene: null };
   document.getElementById('search-input').value = '';
-  renderFilters();
-  renderClips();
+  renderFilters(); renderClips();
 }
 
 function renderClips() {
   const q    = document.getElementById('search-input').value.toLowerCase();
   const grid = document.getElementById('clip-grid');
-
-  let filtered = clips.filter(c => {
+  const filtered = clips.filter(c => {
     if (activeFilters.anime && c.anime     !== activeFilters.anime) return false;
     if (activeFilters.char  && c.character !== activeFilters.char)  return false;
     if (activeFilters.scene && c.scene     !== activeFilters.scene) return false;
     if (q) {
-      const hay = [c.anime, c.character, c.name, c.scene, ...(c.tags||[])].join(' ').toLowerCase();
+      const hay = [c.anime,c.character,c.name,c.scene,...(c.tags||[])].join(' ').toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
   });
-
   if (!filtered.length) {
     grid.innerHTML = `<div class="empty"><div class="empty-icon">◻</div><h3>NO CLIPS FOUND</h3><p>Try adjusting filters or add a new clip.</p></div>`;
     return;
   }
-
-  grid.innerHTML = filtered.map(c => clipCard(c)).join('');
+  grid.innerHTML = filtered.map(clipCard).join('');
 }
 
 function clipCard(c) {
-  const tags = (c.tags||[]).map(t => `<span class="tag">${escHTML(t)}</span>`).join('');
-  return `
-  <div class="clip-card">
-    <div class="clip-thumb" onclick="openVideo('${escAttr(c.url)}','${escAttr(c.name)}')">
-      <video src="${escAttr(c.url)}" muted preload="metadata" style="cursor:pointer"></video>
-      <div class="scene-badge">${escHTML(c.scene)}</div>
+  const tags = (c.tags||[]).map(t=>`<span class="tag">${h(t)}</span>`).join('');
+  return `<div class="clip-card">
+    <div class="clip-thumb" onclick="openVideo('${a(c.url)}','${a(c.name)}')">
+      <video src="${a(c.url)}" muted preload="metadata"></video>
+      <div class="scene-badge">${h(c.scene)}</div>
     </div>
     <div class="clip-body">
-      <div class="clip-anime">${escHTML(c.anime)}</div>
-      <div class="clip-name">${escHTML(c.name)}</div>
-      <div class="clip-char">— ${escHTML(c.character)}</div>
-      ${tags.length ? `<div class="clip-tags">${tags}</div>` : ''}
+      <div class="clip-anime">${h(c.anime)}</div>
+      <div class="clip-name">${h(c.name)}</div>
+      <div class="clip-char">— ${h(c.character)}</div>
+      ${tags?`<div class="clip-tags">${tags}</div>`:''}
       <div class="clip-actions">
-        <a href="${escAttr(c.url)}" download target="_blank" style="flex:1;text-decoration:none">
+        <a href="${a(c.url)}" download target="_blank" style="flex:1;text-decoration:none">
           <button class="btn-dl" style="width:100%">⬇ DOWNLOAD</button>
         </a>
-        <button class="btn-del" onclick="deleteClip('${escAttr(c.id)}')">✕</button>
+        <button class="btn-del" onclick="deleteClip('${a(c.id)}')">✕</button>
       </div>
     </div>
   </div>`;
 }
 
-// ── VIDEO MODAL ──
-function openVideo(url, name) {
-  const m  = document.getElementById('video-modal');
-  const vp = document.getElementById('video-player');
-  document.getElementById('video-modal-title').textContent = name;
-  vp.src = url;
-  vp.play();
-  m.classList.add('open');
-}
-
-function closeVideoModal() {
-  const m  = document.getElementById('video-modal');
-  const vp = document.getElementById('video-player');
-  vp.pause();
-  vp.src = '';
-  m.classList.remove('open');
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeVideoModal();
-    closeModal();
-  }
-});
-
-// ── DELETE ──
 function deleteClip(id) {
   if (!confirm('Remove this clip?')) return;
-  clips = clips.filter(c => c.id !== id);
-  save();
-  render();
+  clips = clips.filter(c=>c.id!==id);
+  save(); render();
 }
 
-// ── ADD MODAL ──
-function openModal() {
-  document.getElementById('add-modal').classList.add('open');
-  resetForm();
+// ══ VIDEO MODAL ══
+function openVideo(url, name) {
+  document.getElementById('video-modal-title').textContent = name;
+  const vp = document.getElementById('video-player');
+  vp.src = url; vp.play();
+  document.getElementById('video-modal').classList.add('open');
 }
-
-function closeModal() {
-  document.getElementById('add-modal').classList.remove('open');
-  resetForm();
+function closeVideoModal() {
+  const vp = document.getElementById('video-player');
+  vp.pause(); vp.src = '';
+  document.getElementById('video-modal').classList.remove('open');
 }
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  closeVideoModal(); closeModal();
+  if (!bulkRunning) closeBulkModal();
+});
 
-function handleModalBgClick(e) {
-  if (e.target === document.getElementById('add-modal')) closeModal();
-}
+// ══ SINGLE MODAL ══
+function openModal()  { document.getElementById('add-modal').classList.add('open'); resetSingle(); }
+function closeModal() { document.getElementById('add-modal').classList.remove('open'); resetSingle(); }
 
-function resetForm() {
-  ['f-anime','f-scene','f-char','f-name','f-tags'].forEach(id => {
-    const el = document.getElementById(id);
-    el.tagName === 'SELECT' ? (el.selectedIndex = 0) : (el.value = '');
-  });
-  selectedFile = null;
-  catboxUrl = null;
-  document.getElementById('drop-file-name').textContent = '';
+function resetSingle() {
+  ['f-anime','f-char','f-name','f-tags'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-scene').selectedIndex=0;
+  selectedFile=null;
+  document.getElementById('drop-file-name').textContent='';
   document.getElementById('drop-zone').classList.remove('has-file');
-  setUploadStatus('', '');
-  setProgress(0, false);
-  document.getElementById('submit-btn').disabled = false;
-  document.getElementById('drop-input').value = '';
+  setSingleStatus('','');
+  setSingleProgress(0,false);
+  document.getElementById('submit-btn').disabled=false;
+  document.getElementById('drop-input').value='';
 }
 
-// ── DRAG & DROP ──
-function handleDragOver(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.add('drag-over');
-}
-function handleDragLeave() {
-  document.getElementById('drop-zone').classList.remove('drag-over');
-}
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith('video/')) setFile(file);
+// ══ DROP ZONE HELPERS ══
+function dzOver(e, id)  { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
+function dzLeave(id)    { document.getElementById(id).classList.remove('drag-over'); }
+
+function handleSingleDrop(e) {
+  e.preventDefault(); dzLeave('drop-zone');
+  const f = e.dataTransfer.files[0];
+  if (f && isVideo(f)) setSingleFile(f);
   else toast('Please drop a video file', 'error');
 }
-function handleFileSelect(e) {
-  const file = e.target.files[0];
-  if (file) setFile(file);
-}
-function setFile(file) {
-  selectedFile = file;
-  catboxUrl = null;
-  document.getElementById('drop-file-name').textContent = file.name;
+function handleFileSelect(e) { if (e.target.files[0]) setSingleFile(e.target.files[0]); }
+function setSingleFile(f) {
+  selectedFile = f;
+  document.getElementById('drop-file-name').textContent = f.name;
   document.getElementById('drop-zone').classList.add('has-file');
-  setUploadStatus('', '');
+  setSingleStatus('','');
 }
 
-// ── CATBOX UPLOAD ──
+// ══ CATBOX UPLOAD ══
 function xhrUpload(endpoint, file, onProgress) {
   return new Promise((resolve, reject) => {
     const fd = new FormData();
     fd.append('reqtype', 'fileupload');
     fd.append('fileToUpload', file);
-
     const xhr = new XMLHttpRequest();
     xhr.open('POST', endpoint);
-
-    xhr.upload.onprogress = (e) => {
-      if (e.lengthComputable) onProgress(Math.round(e.loaded / e.total * 100));
-    };
-
+    xhr.upload.onprogress = e => { if (e.lengthComputable) onProgress(Math.round(e.loaded/e.total*100)); };
     xhr.onload = () => {
-      const text = xhr.responseText.trim();
-      if (xhr.status === 200 && text.startsWith('https://')) {
-        resolve(text);
-      } else {
-        reject(new Error(text || `HTTP ${xhr.status}`));
-      }
+      const t = xhr.responseText.trim();
+      if (xhr.status===200 && t.startsWith('https://')) resolve(t);
+      else reject(new Error(t||`HTTP ${xhr.status}`));
     };
-
-    xhr.onerror  = () => reject(new Error('Network error — check your connection'));
-    xhr.ontimeout = () => reject(new Error('Request timed out'));
-    xhr.timeout  = 120000; // 2 min
+    xhr.onerror   = () => reject(new Error('Network error'));
+    xhr.ontimeout = () => reject(new Error('Timed out'));
+    xhr.timeout   = 180000;
     xhr.send(fd);
   });
 }
 
-async function uploadToCatbox(file) {
-  // Try via CORS proxy first (needed for file:// and some origins)
-  try {
-    setUploadStatus('UPLOADING VIA PROXY...', '');
-    const url = await xhrUpload(CATBOX_API_PROXY, file, p => setProgress(p, true));
-    return url;
-  } catch (proxyErr) {
-    console.warn('Proxy upload failed, trying direct:', proxyErr.message);
-    setUploadStatus('PROXY FAILED — RETRYING DIRECT...', '');
-    setProgress(0, true);
-  }
-
-  // Fallback: direct (works on GitHub Pages)
-  try {
-    const url = await xhrUpload(CATBOX_API, file, p => setProgress(p, true));
-    return url;
-  } catch (directErr) {
-    throw new Error(
-      'Upload failed via both proxy and direct.\n' +
-      'If you\'re testing locally, try GitHub Pages instead.\n' +
-      'Error: ' + directErr.message
-    );
-  }
+async function catboxUpload(file, onProgress) {
+  try   { return await xhrUpload(CATBOX_PROXY,  file, onProgress); }
+  catch (e) { console.warn('Proxy failed:', e.message); }
+  try   { return await xhrUpload(CATBOX_DIRECT, file, onProgress); }
+  catch (e) { throw new Error('Upload failed: ' + e.message); }
 }
 
-// ── SUBMIT ──
+// ══ SINGLE SUBMIT ══
 async function submitClip() {
   const anime = document.getElementById('f-anime').value.trim();
   const scene = document.getElementById('f-scene').value;
@@ -946,76 +620,281 @@ async function submitClip() {
   const name  = document.getElementById('f-name').value.trim();
   const tags  = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
 
-  if (!anime || !scene || !char || !name) { toast('Please fill in all fields', 'error'); return; }
-  if (!selectedFile) { toast('Please select a video file', 'error'); return; }
+  if (!anime||!scene||!char||!name) { toast('Please fill in all fields','error'); return; }
+  if (!selectedFile)                 { toast('Please select a video file','error'); return; }
 
   document.getElementById('submit-btn').disabled = true;
-  setUploadStatus('UPLOADING TO CATBOX...', '');
-  setProgress(0, true);
+  setSingleStatus('UPLOADING...','');
+  setSingleProgress(0,true);
 
   try {
-    const url = await uploadToCatbox(selectedFile);
-    setUploadStatus('✓ UPLOADED: ' + url, 'success');
-    setProgress(100, true);
-
-    const clip = {
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
-      anime, scene, character: char, name, tags, url,
-      added: new Date().toISOString()
-    };
-
-    clips.unshift(clip);
-    save();
-    render();
-    setTimeout(closeModal, 800);
-    toast('Clip saved: ' + name, 'success');
-  } catch (err) {
-    setUploadStatus('✕ ' + err.message, 'error');
-    setProgress(0, false);
-    document.getElementById('submit-btn').disabled = false;
-    toast(err.message, 'error');
+    const url = await catboxUpload(selectedFile, p=>setSingleProgress(p,true));
+    setSingleStatus('✓ '+url,'success');
+    setSingleProgress(100,true);
+    clips.unshift({ id:uid(), anime, scene, character:char, name, tags, url, added:new Date().toISOString() });
+    save(); render();
+    setTimeout(closeModal, 700);
+    toast('Saved: '+name,'success');
+  } catch(err) {
+    setSingleStatus('✕ '+err.message,'error');
+    setSingleProgress(0,false);
+    document.getElementById('submit-btn').disabled=false;
+    toast(err.message,'error');
   }
 }
 
-function setUploadStatus(msg, type) {
+function setSingleStatus(msg, type) {
   const el = document.getElementById('upload-status');
   el.textContent = msg;
-  el.className = 'upload-status' + (msg ? ' visible' : '') + (type ? ' ' + type : '');
+  el.className = 'upload-status'+(msg?' visible':'')+(type?' '+type:'');
+}
+function setSingleProgress(pct, show) {
+  document.getElementById('progress-wrap').classList.toggle('visible', show);
+  document.getElementById('progress-bar').style.width = pct+'%';
 }
 
-function setProgress(pct, show) {
-  const wrap = document.getElementById('progress-wrap');
-  const bar  = document.getElementById('progress-bar');
-  wrap.classList.toggle('visible', show);
-  bar.style.width = pct + '%';
+// ══════════════════════
+// ══ BULK IMPORT ══
+// ══════════════════════
+
+function openBulkModal() {
+  document.getElementById('bulk-modal').classList.add('open');
+  resetBulk();
+}
+function closeBulkModal() {
+  if (bulkRunning) return;
+  document.getElementById('bulk-modal').classList.remove('open');
+  resetBulk();
 }
 
-// ── EXPORT JSON ──
+function resetBulk() {
+  bulkQueue=[]; bulkRunning=false;
+  ['b-anime','b-char','b-tags'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('b-scene').selectedIndex=0;
+  document.getElementById('bulk-input').value='';
+  document.getElementById('queue-list').innerHTML='';
+  document.getElementById('bulk-queue').classList.remove('has-files');
+  document.getElementById('bulk-overall').classList.remove('visible');
+  document.getElementById('bulk-bar').style.width='0%';
+  document.getElementById('bulk-footer-info').textContent='';
+  document.getElementById('bulk-submit-btn').disabled=false;
+  document.getElementById('bulk-cancel-btn').textContent='CANCEL';
+}
+
+// Handle folder drag-drop (uses FileSystem API to recurse into folders)
+async function handleBulkDrop(e) {
+  e.preventDefault(); dzLeave('bulk-drop-zone');
+  const items = [...(e.dataTransfer.items||[])];
+  let files = [];
+
+  if (items.length && items[0].webkitGetAsEntry) {
+    for (const item of items) {
+      const entry = item.webkitGetAsEntry();
+      if (!entry) continue;
+      if (entry.isDirectory) {
+        const sub = await readDir(entry);
+        files = files.concat(sub);
+      } else if (entry.isFile) {
+        const f = await entryToFile(entry);
+        if (f) files.push(f);
+      }
+    }
+  } else {
+    files = [...e.dataTransfer.files];
+  }
+
+  const videos = files.filter(f => isVideo(f));
+  if (!videos.length) { toast('No video files found in drop','error'); return; }
+  addToQueue(videos);
+  toast(`Added ${videos.length} video${videos.length>1?'s':''} to queue`,'info');
+}
+
+function handleBulkSelect(e) {
+  const videos = [...e.target.files].filter(f=>isVideo(f));
+  if (!videos.length) { toast('No video files selected','error'); return; }
+  addToQueue(videos);
+  e.target.value = '';
+  toast(`Added ${videos.length} video${videos.length>1?'s':''} to queue`,'info');
+}
+
+// Recursively read a directory entry
+function readDir(dirEntry) {
+  return new Promise(resolve => {
+    const reader = dirEntry.createReader();
+    const all = [];
+    function batch() {
+      reader.readEntries(async entries => {
+        if (!entries.length) { resolve(all); return; }
+        for (const e of entries) {
+          if (e.isFile) {
+            const f = await entryToFile(e);
+            if (f) all.push(f);
+          } else if (e.isDirectory) {
+            const sub = await readDir(e);
+            all.push(...sub);
+          }
+        }
+        batch(); // readEntries may return partial results — must call again
+      }, () => resolve(all));
+    }
+    batch();
+  });
+}
+
+function entryToFile(fileEntry) {
+  return new Promise(r => fileEntry.file(f=>r(f), ()=>r(null)));
+}
+
+function isVideo(f) {
+  return f.type.startsWith('video/') || /\.(mp4|mkv|mov|avi|webm|flv|wmv|m4v|ts|vob)$/i.test(f.name);
+}
+
+function addToQueue(files) {
+  files.forEach(f => {
+    const name = f.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g,' ').trim();
+    bulkQueue.push({ file:f, name, status:'pending', url:null, error:null });
+  });
+  renderQueue();
+}
+
+function renderQueue() {
+  const list = document.getElementById('queue-list');
+  const wrap = document.getElementById('bulk-queue');
+  if (!bulkQueue.length) { wrap.classList.remove('has-files'); list.innerHTML=''; return; }
+  wrap.classList.add('has-files');
+
+  list.innerHTML = bulkQueue.map((item,i) => `
+    <div class="queue-item ${item.status}" id="qi-${i}">
+      <input class="queue-name-input" type="text" value="${h(item.name)}" id="qn-${i}"
+        ${item.status!=='pending'?'disabled':''}
+        oninput="bulkQueue[${i}].name=this.value">
+      <span class="queue-status ${item.status}" id="qs-${i}">${statusLabel(item)}</span>
+      <button class="queue-remove" id="qr-${i}"
+        ${item.status!=='pending'?'disabled':''}
+        onclick="removeQueueItem(${i})">✕</button>
+    </div>`).join('');
+
+  const pending = bulkQueue.filter(i=>i.status==='pending').length;
+  document.getElementById('bulk-footer-info').textContent =
+    bulkQueue.length + ' FILE' + (bulkQueue.length>1?'S':'') + ' QUEUED' +
+    (pending < bulkQueue.length ? ` (${pending} pending)` : '');
+}
+
+function statusLabel(item) {
+  if (item.status==='pending')   return 'PENDING';
+  if (item.status==='uploading') return 'UPLOADING...';
+  if (item.status==='done')      return '✓ DONE';
+  if (item.status==='failed')    return '✕ '+(item.error||'FAILED');
+  return '';
+}
+
+function updateQueueRow(i) {
+  const item = bulkQueue[i];
+  const row  = document.getElementById(`qi-${i}`);
+  const st   = document.getElementById(`qs-${i}`);
+  const inp  = document.getElementById(`qn-${i}`);
+  const btn  = document.getElementById(`qr-${i}`);
+  if (!row) return;
+  row.className = `queue-item ${item.status}`;
+  if (st)  { st.className=`queue-status ${item.status}`; st.textContent=statusLabel(item); }
+  if (inp) inp.disabled = item.status!=='pending';
+  if (btn) btn.disabled = item.status!=='pending';
+}
+
+function removeQueueItem(i) {
+  bulkQueue.splice(i,1);
+  renderQueue();
+}
+
+async function submitBulk() {
+  const anime = document.getElementById('b-anime').value.trim();
+  const scene = document.getElementById('b-scene').value;
+  const char  = document.getElementById('b-char').value.trim();
+  const tags  = document.getElementById('b-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+
+  if (!anime||!scene||!char) { toast('Fill in Anime, Scene Type & Character first','error'); return; }
+
+  const pendingItems = bulkQueue.filter(i=>i.status==='pending');
+  if (!pendingItems.length) { toast('No pending files in queue','error'); return; }
+
+  bulkRunning = true;
+  document.getElementById('bulk-submit-btn').disabled = true;
+  document.getElementById('bulk-cancel-btn').textContent = 'CLOSE';
+  document.getElementById('bulk-overall').classList.add('visible');
+
+  const total = pendingItems.length;
+  let done=0, failed=0;
+  updateBulkBar(0, total);
+
+  for (let i=0; i<bulkQueue.length; i++) {
+    const item = bulkQueue[i];
+    if (item.status !== 'pending') continue;
+
+    item.status = 'uploading';
+    updateQueueRow(i);
+    // Scroll item into view
+    document.getElementById(`qi-${i}`)?.scrollIntoView({ block:'nearest' });
+
+    try {
+      const url = await catboxUpload(item.file, p => {
+        const st = document.getElementById(`qs-${i}`);
+        if (st) st.textContent = `UPLOADING ${p}%`;
+      });
+      item.status='done'; item.url=url;
+      updateQueueRow(i);
+      clips.unshift({
+        id:uid(), anime, scene, character:char,
+        name: item.name || item.file.name,
+        tags, url, added:new Date().toISOString()
+      });
+      save(); render();
+      done++;
+    } catch(err) {
+      item.status='failed';
+      item.error = err.message.length>36 ? err.message.substring(0,36)+'…' : err.message;
+      updateQueueRow(i);
+      failed++;
+    }
+
+    updateBulkBar(done+failed, total);
+  }
+
+  bulkRunning = false;
+  const summary = `Done: ${done} saved${failed?`, ${failed} failed`:''}`;
+  document.getElementById('bulk-footer-info').textContent = summary;
+  toast(summary, done>0?'success':'error');
+  document.getElementById('bulk-cancel-btn').textContent = 'CLOSE';
+}
+
+function updateBulkBar(current, total) {
+  const pct = total ? Math.round(current/total*100) : 0;
+  document.getElementById('bulk-bar').style.width = pct+'%';
+  document.getElementById('bulk-progress-label').textContent = `${current} / ${total}`;
+}
+
+// ══ EXPORT ══
 function exportJSON() {
-  const blob = new Blob([JSON.stringify(clips, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(clips,null,2)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'clips.json';
   a.click();
-  toast('clips.json exported — commit it to your GitHub repo', 'success');
+  toast('clips.json exported — commit it to GitHub','success');
 }
 
-// ── TOAST ──
+// ══ TOAST ══
 function toast(msg, type='') {
   const el = document.createElement('div');
-  el.className = 'toast ' + type;
+  el.className = 'toast '+type;
   el.textContent = msg;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 3200);
+  setTimeout(()=>el.remove(), 3500);
 }
 
-// ── UTILS ──
-function escHTML(str='') {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function escAttr(str='') {
-  return str.replace(/'/g,'&#39;').replace(/"/g,'&quot;');
-}
+// ══ UTILS ══
+function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function h(s='') { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function a(s='') { return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
 </script>
 </body>
 </html>
