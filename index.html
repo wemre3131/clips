@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --surface2: #1a1a1a;
-    --border: #222222;
+    --bg: #080808;
+    --surface: #101010;
+    --surface2: #181818;
+    --border: #1e1e1e;
     --accent: #e8ff47;
     --accent2: #ff4747;
     --accent3: #47b8ff;
-    --text: #e8e8e8;
-    --muted: #555555;
+    --text: #ebebeb;
+    --muted: #4a4a4a;
     --font-mono: 'Space Mono', monospace;
     --font-body: 'DM Sans', sans-serif;
   }
@@ -28,87 +28,223 @@
     font-family: var(--font-body);
     font-size: 14px;
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
+  /* ─── HEADER ─── */
   header {
     border-bottom: 1px solid var(--border);
-    padding: 20px 32px;
+    padding: 18px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
-    background: var(--bg);
+    background: rgba(8,8,8,0.95);
+    backdrop-filter: blur(10px);
     z-index: 100;
+    gap: 16px;
   }
 
-  .logo { font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); }
+  .logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
   .logo span { color: var(--muted); }
-  .header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .count-badge { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 
-  button {
-    cursor: pointer; border: none;
-    font-family: var(--font-mono); font-size: 11px;
-    letter-spacing: 0.1em; font-weight: 700;
-    transition: all 0.15s;
+  .header-center {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
   }
+  .header-center input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px 8px 34px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .header-center input:focus { border-color: var(--muted); }
+  .header-center input::placeholder { color: var(--muted); }
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 14px; pointer-events: none; }
 
-  .btn-primary { background: var(--accent); color: #000; padding: 9px 18px; }
+  .header-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .count-badge { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; white-space: nowrap; }
+
+  /* ─── BUTTONS ─── */
+  button { cursor: pointer; border: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; font-weight: 700; transition: all 0.15s; }
+  .btn-primary { background: var(--accent); color: #000; padding: 8px 16px; }
   .btn-primary:hover { background: #d4eb20; }
   .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .btn-bulk { background: transparent; color: var(--accent3); padding: 9px 18px; border: 1px solid var(--accent3); }
+  .btn-bulk { background: transparent; color: var(--accent3); padding: 8px 16px; border: 1px solid var(--accent3); }
   .btn-bulk:hover { background: rgba(71,184,255,0.08); }
   .btn-bulk:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .btn-ghost { background: transparent; color: var(--muted); padding: 9px 14px; border: 1px solid var(--border); }
+  .btn-ghost { background: transparent; color: var(--muted); padding: 8px 12px; border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
-
-  .btn-dl { background: var(--surface2); color: var(--text); padding: 7px 14px; border: 1px solid var(--border); width: 100%; margin-top: 6px; font-size: 10px; }
+  .btn-dl { background: var(--surface2); color: var(--text); padding: 7px 14px; border: 1px solid var(--border); width: 100%; font-size: 10px; }
   .btn-dl:hover { border-color: var(--accent); color: var(--accent); }
-
   .btn-del { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 7px 10px; font-size: 11px; flex-shrink: 0; }
   .btn-del:hover { border-color: var(--accent2); color: var(--accent2); }
 
-  .app { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 61px); }
+  /* ─── BREADCRUMB ─── */
+  .breadcrumb {
+    padding: 16px 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    min-height: 42px;
+  }
+  .bc-item { cursor: pointer; transition: color 0.15s; }
+  .bc-item:hover { color: var(--text); }
+  .bc-item.active { color: var(--accent); cursor: default; }
+  .bc-sep { opacity: 0.3; }
 
-  aside {
-    border-right: 1px solid var(--border);
-    padding: 24px 20px;
-    position: sticky; top: 61px;
-    height: calc(100vh - 61px);
-    overflow-y: auto;
+  /* ─── MAIN CONTENT ─── */
+  .main { padding: 20px 32px 48px; }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .section-count {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    opacity: 0.5;
   }
 
-  .sidebar-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; }
-  .sidebar-section { margin-bottom: 28px; }
+  /* ─── ANIME BANNER GRID ─── */
+  .banner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
 
-  .filter-item { padding: 7px 10px; cursor: pointer; border-radius: 2px; font-size: 13px; color: var(--muted); transition: all 0.1s; display: flex; justify-content: space-between; align-items: center; }
-  .filter-item:hover { color: var(--text); background: var(--surface); }
-  .filter-item.active { color: var(--accent); background: var(--surface); }
-  .filter-count { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+  .banner-card {
+    position: relative;
+    aspect-ratio: 16/7;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+    animation: fadeIn 0.35s ease both;
+  }
+  .banner-card:hover { transform: translateY(-3px); border-color: #333; }
+  .banner-card:hover .banner-overlay { background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%); }
+  .banner-card:hover .banner-name { color: var(--accent); }
 
-  main { padding: 28px 32px; }
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .banner-card:hover .banner-img { transform: scale(1.04); }
 
-  .main-toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; }
-  .search-wrap { flex: 1; position: relative; }
-  .search-wrap input { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 9px 12px 9px 36px; font-family: var(--font-body); font-size: 13px; outline: none; transition: border-color 0.15s; }
-  .search-wrap input:focus { border-color: var(--muted); }
-  .search-wrap input::placeholder { color: var(--muted); }
-  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; pointer-events: none; }
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.05) 55%);
+    transition: background 0.2s;
+  }
 
-  .clip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .banner-name {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    text-transform: uppercase;
+    transition: color 0.2s;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  }
+
+  .banner-clip-count {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.75);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 3px 8px;
+  }
+
+  /* ─── CHARACTER BANNER GRID (portrait style) ─── */
+  .char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .char-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+    animation: fadeIn 0.3s ease both;
+  }
+  .char-card:hover { transform: translateY(-3px); border-color: #333; }
+  .char-card:hover .banner-img { transform: scale(1.05); }
+  .char-card:hover .banner-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 50%); }
+  .char-card:hover .banner-name { color: var(--accent); }
+
+  /* placeholder card for anime/chars with no banner */
+  .banner-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    opacity: 0.3;
+  }
+
+  /* ─── CLIP GRID ─── */
+  .clip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
 
   .clip-card { background: var(--surface); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.2s, transform 0.2s; animation: fadeIn 0.3s ease; }
-  .clip-card:hover { border-color: #333; transform: translateY(-2px); }
+  .clip-card:hover { border-color: #2a2a2a; transform: translateY(-2px); }
 
   @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
   .clip-thumb { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; cursor: pointer; }
   .clip-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
   .scene-badge { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.8); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--accent); padding: 3px 7px; text-transform: uppercase; }
 
   .clip-body { padding: 14px; }
@@ -118,20 +254,18 @@
   .clip-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
   .tag { background: var(--surface2); border: 1px solid var(--border); font-family: var(--font-mono); font-size: 9px; color: var(--muted); padding: 2px 7px; letter-spacing: 0.08em; }
   .clip-actions { display: flex; gap: 8px; }
-  .clip-actions .btn-dl { margin-top: 0; }
 
+  /* ─── EMPTY ─── */
   .empty { grid-column: 1/-1; text-align: center; padding: 80px 20px; color: var(--muted); }
-  .empty .empty-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.3; }
+  .empty-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.25; }
   .empty h3 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.15em; margin-bottom: 8px; color: var(--text); }
   .empty p { font-size: 12px; line-height: 1.6; }
 
-  /* ── MODALS ── */
-  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto; }
+  /* ─── MODALS ─── */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 200; align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto; }
   .modal-bg.open { display: flex; }
-
   .modal { background: var(--surface); border: 1px solid var(--border); width: 100%; max-width: 520px; padding: 32px; animation: slideUp 0.25s ease; }
   .modal-wide { max-width: 780px; }
-
   @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
   .modal-title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 24px; text-transform: uppercase; }
@@ -144,44 +278,39 @@
   .form-row select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
 
+  .form-hint { font-family: var(--font-mono); font-size: 9px; color: var(--muted); margin-top: 5px; letter-spacing: 0.08em; opacity: 0.7; }
+
   .drop-zone { border: 1px dashed var(--border); padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg); }
   .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: rgba(232,255,71,0.03); }
   .drop-zone.has-file { border-style: solid; border-color: #2a2a2a; }
   .drop-zone.bulk-zone { border-color: rgba(71,184,255,0.25); }
   .drop-zone.bulk-zone:hover, .drop-zone.bulk-zone.drag-over { border-color: var(--accent3); background: rgba(71,184,255,0.04); }
-
   .drop-icon { font-size: 26px; margin-bottom: 8px; opacity: 0.4; }
   .drop-text { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted); }
   .drop-subtext { font-family: var(--font-mono); font-size: 9px; color: var(--muted); opacity: 0.5; margin-top: 4px; }
   .drop-file-name { font-family: var(--font-mono); font-size: 11px; color: var(--accent); margin-top: 6px; }
 
-  /* ── BULK QUEUE ── */
-  .bulk-queue { margin-top: 14px; border: 1px solid var(--border); max-height: 280px; overflow-y: auto; display: none; }
+  /* bulk queue */
+  .bulk-queue { margin-top: 14px; border: 1px solid var(--border); max-height: 260px; overflow-y: auto; display: none; }
   .bulk-queue.has-files { display: block; }
-
   .queue-header { display: grid; grid-template-columns: 1fr 150px 32px; gap: 8px; padding: 7px 12px; border-bottom: 1px solid var(--border); background: var(--surface2); }
   .queue-header span { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
-
   .queue-item { display: grid; grid-template-columns: 1fr 150px 32px; gap: 8px; padding: 7px 12px; border-bottom: 1px solid var(--border); align-items: center; }
   .queue-item:last-child { border-bottom: none; }
   .queue-item.uploading { background: rgba(71,184,255,0.04); }
   .queue-item.done      { background: rgba(232,255,71,0.03); }
   .queue-item.failed    { background: rgba(255,71,71,0.04); }
-
   .queue-name-input { background: transparent; border: none; border-bottom: 1px solid transparent; color: var(--text); font-family: var(--font-body); font-size: 12px; padding: 2px 4px; width: 100%; outline: none; transition: border-color 0.15s; }
   .queue-name-input:focus { border-bottom-color: var(--accent3); }
   .queue-name-input:disabled { opacity: 0.45; }
-
   .queue-status { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.07em; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .queue-status.uploading { color: var(--accent3); }
   .queue-status.done      { color: var(--accent); }
   .queue-status.failed    { color: var(--accent2); }
-
   .queue-remove { background: none; border: none; color: var(--muted); font-size: 12px; padding: 2px 6px; cursor: pointer; font-family: var(--font-mono); }
   .queue-remove:hover { color: var(--accent2); }
   .queue-remove:disabled { opacity: 0.15; cursor: not-allowed; }
 
-  /* ── OVERALL PROGRESS ── */
   .bulk-overall { display: none; margin-top: 16px; }
   .bulk-overall.visible { display: block; }
   .bulk-overall-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 6px; display: flex; justify-content: space-between; }
@@ -189,7 +318,6 @@
   .bulk-bar-wrap { height: 2px; background: var(--border); }
   .bulk-bar { height: 100%; background: var(--accent3); width: 0%; transition: width 0.35s; }
 
-  /* ── SINGLE PROGRESS ── */
   .upload-status { display: none; font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 12px; letter-spacing: 0.08em; }
   .upload-status.visible { display: block; }
   .upload-status.success { color: var(--accent); }
@@ -201,15 +329,14 @@
   .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); align-items: center; }
   .modal-footer-info { flex: 1; font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
 
+  /* ─── TOAST ─── */
   .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface2); border: 1px solid var(--border); padding: 12px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; z-index: 300; animation: fadeIn 0.2s ease; max-width: 340px; line-height: 1.5; }
   .toast.success { border-left: 3px solid var(--accent); }
   .toast.error   { border-left: 3px solid var(--accent2); color: var(--accent2); }
   .toast.info    { border-left: 3px solid var(--accent3); }
 
-  .export-bar { border-top: 1px solid var(--border); padding: 12px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; background: var(--bg); }
-  .export-bar span { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
-
-  .video-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 250; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+  /* ─── VIDEO MODAL ─── */
+  .video-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 250; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
   .video-modal-bg.open { display: flex; }
   .video-modal-bg video { max-width: 90vw; max-height: 75vh; outline: none; }
   .video-modal-close { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--muted); cursor: pointer; background: none; border: none; padding: 8px 16px; }
@@ -220,65 +347,45 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); }
 
-  @media (max-width: 640px) {
-    .app { grid-template-columns: 1fr; }
-    aside { display: none; }
-    header { padding: 16px; }
-    main { padding: 16px; }
+  @media (max-width: 600px) {
+    header { padding: 14px 16px; }
+    .header-center { display: none; }
+    .main { padding: 16px 16px 40px; }
+    .breadcrumb { padding: 12px 16px 0; }
+    .banner-grid { grid-template-columns: 1fr 1fr; }
+    .char-grid { grid-template-columns: repeat(3, 1fr); }
+    .clip-grid { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
+<!-- ══ HEADER ══ -->
 <header>
   <div class="logo">CLIP<span>_</span>VAULT</div>
+  <div class="header-center">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="search-input" placeholder="Search clips, characters, anime..." oninput="onSearch()">
+  </div>
   <div class="header-actions">
     <span class="count-badge" id="clip-count">0 CLIPS</span>
-    <button class="btn-ghost"   onclick="exportJSON()">EXPORT JSON</button>
-    <button class="btn-bulk"    onclick="openBulkModal()">⬆ BULK IMPORT</button>
-    <button class="btn-primary" onclick="openModal()">+ ADD CLIP</button>
+    <button class="btn-ghost"   onclick="exportJSON()">EXPORT</button>
+    <button class="btn-bulk"    onclick="openBulkModal()">⬆ BULK</button>
+    <button class="btn-primary" onclick="openModal()">+ ADD</button>
   </div>
 </header>
 
-<div class="app">
-  <aside>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Anime</div>
-      <div id="anime-filters"></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Character</div>
-      <div id="char-filters"></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Scene Type</div>
-      <div id="scene-filters"></div>
-    </div>
-  </aside>
+<!-- ══ BREADCRUMB ══ -->
+<div class="breadcrumb" id="breadcrumb"></div>
 
-  <main>
-    <div class="main-toolbar">
-      <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input type="text" id="search-input" placeholder="Search clips, characters, anime..." oninput="renderClips()">
-      </div>
-      <button class="btn-ghost" onclick="clearFilters()">CLEAR</button>
-    </div>
-    <div class="clip-grid" id="clip-grid"></div>
-  </main>
-</div>
-
-<div class="export-bar">
-  <span>STORE IS LOCAL — EXPORT JSON TO DEPLOY ON GITHUB</span>
-  <button class="btn-ghost" onclick="exportJSON()">⬇ EXPORT clips.json</button>
-</div>
+<!-- ══ MAIN ══ -->
+<div class="main" id="main-content"></div>
 
 <!-- ══ SINGLE ADD MODAL ══ -->
 <div class="modal-bg" id="add-modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-title">// ADD NEW CLIP</div>
-
     <div class="form-row">
       <label>Anime</label>
       <input type="text" id="f-anime" placeholder="e.g. Naruto" list="anime-datalist">
@@ -288,7 +395,7 @@
       <div class="form-row">
         <label>Scene Type</label>
         <select id="f-scene">
-          <option value="">Select type...</option>
+          <option value="">Select...</option>
           <option>Action</option><option>Emotional</option><option>Funny</option>
           <option>Romance</option><option>Plot Twist</option><option>Training</option>
           <option>Death</option><option>Transformation</option><option>Other</option>
@@ -309,6 +416,15 @@
       <input type="text" id="f-tags" placeholder="e.g. sharingan, uchiha, sad">
     </div>
     <div class="form-row">
+      <label>Anime Banner URL <span style="color:var(--muted);font-weight:400">(optional — used on home screen)</span></label>
+      <input type="text" id="f-anime-banner" placeholder="https://...">
+      <div class="form-hint">If this anime has no banner yet, paste one here</div>
+    </div>
+    <div class="form-row">
+      <label>Character Banner URL <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+      <input type="text" id="f-char-banner" placeholder="https://...">
+    </div>
+    <div class="form-row">
       <label>Video File</label>
       <div class="drop-zone" id="drop-zone"
         onclick="document.getElementById('drop-input').click()"
@@ -323,7 +439,6 @@
       <div class="upload-status" id="upload-status"></div>
       <div class="progress-bar-wrap" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
     </div>
-
     <div class="modal-footer">
       <button class="btn-ghost" onclick="closeModal()">CANCEL</button>
       <button class="btn-primary" id="submit-btn" onclick="submitClip()">UPLOAD & SAVE</button>
@@ -335,7 +450,6 @@
 <div class="modal-bg" id="bulk-modal" onclick="if(event.target===this&&!bulkRunning)closeBulkModal()">
   <div class="modal modal-wide">
     <div class="modal-title bulk">// BULK IMPORT</div>
-
     <div class="form-grid">
       <div class="form-row">
         <label>Anime <span style="color:var(--accent2)">*</span></label>
@@ -344,7 +458,7 @@
       <div class="form-row">
         <label>Scene Type <span style="color:var(--accent2)">*</span></label>
         <select id="b-scene">
-          <option value="">Select type...</option>
+          <option value="">Select...</option>
           <option>Action</option><option>Emotional</option><option>Funny</option>
           <option>Romance</option><option>Plot Twist</option><option>Training</option>
           <option>Death</option><option>Transformation</option><option>Other</option>
@@ -359,38 +473,27 @@
         <input type="text" id="b-tags" placeholder="e.g. uchiha, action">
       </div>
     </div>
-
     <div class="form-row">
-      <label>Videos — drop a folder or select multiple files</label>
+      <label>Videos — drop a folder or select multiple</label>
       <div class="drop-zone bulk-zone" id="bulk-drop-zone"
         onclick="document.getElementById('bulk-input').click()"
         ondrop="handleBulkDrop(event)"
         ondragover="dzOver(event,'bulk-drop-zone')"
         ondragleave="dzLeave('bulk-drop-zone')">
         <div class="drop-icon">📂</div>
-        <div class="drop-text">DROP FOLDER OR MULTIPLE FILES HERE</div>
-        <div class="drop-subtext">OR CLICK TO BROWSE — SUPPORTS MP4, MKV, MOV, WEBM, AVI & MORE</div>
+        <div class="drop-text">DROP FOLDER OR MULTIPLE FILES</div>
+        <div class="drop-subtext">OR CLICK TO BROWSE — MP4, MKV, MOV, WEBM, AVI & MORE</div>
       </div>
       <input type="file" id="bulk-input" accept="video/*" multiple onchange="handleBulkSelect(event)" style="display:none">
     </div>
-
     <div class="bulk-queue" id="bulk-queue">
-      <div class="queue-header">
-        <span>Clip Name (click to edit)</span>
-        <span>Status</span>
-        <span></span>
-      </div>
+      <div class="queue-header"><span>Clip Name (editable)</span><span>Status</span><span></span></div>
       <div id="queue-list"></div>
     </div>
-
     <div class="bulk-overall" id="bulk-overall">
-      <div class="bulk-overall-label">
-        <span>UPLOADING TO CATBOX.MOE</span>
-        <span id="bulk-progress-label">0 / 0</span>
-      </div>
+      <div class="bulk-overall-label"><span>UPLOADING TO CATBOX.MOE</span><span id="bulk-progress-label">0 / 0</span></div>
       <div class="bulk-bar-wrap"><div class="bulk-bar" id="bulk-bar"></div></div>
     </div>
-
     <div class="modal-footer">
       <div class="modal-footer-info" id="bulk-footer-info"></div>
       <button class="btn-ghost" id="bulk-cancel-btn" onclick="closeBulkModal()">CANCEL</button>
@@ -408,10 +511,12 @@
 
 <script>
 // ══ STATE ══
-let clips = [];
+let clips   = [];
+let banners = { anime: {}, character: {} };  // { anime: {name: url}, character: {name: url} }
 let selectedFile = null;
-let activeFilters = { anime: null, char: null, scene: null };
-let bulkQueue  = [];   // [{ file, name, status, url, error }]
+let activeFilters = { anime: null, char: null };
+let searchMode  = false;
+let bulkQueue   = [];
 let bulkRunning = false;
 
 const CATBOX_DIRECT = 'https://catbox.moe/user/api.php';
@@ -423,87 +528,196 @@ const CATBOX_PROXY  = 'https://corsproxy.io/?' + encodeURIComponent('https://cat
     const res = await fetch('./clips.json');
     if (res.ok) {
       const d = await res.json();
-      clips = Array.isArray(d) ? d : [];
-      toast('Loaded clips.json', 'success');
+      // Support both old format (array) and new format ({banners, clips})
+      if (Array.isArray(d)) {
+        clips = d;
+      } else {
+        clips   = Array.isArray(d.clips)   ? d.clips   : [];
+        banners = d.banners || { anime: {}, character: {} };
+      }
     }
   } catch(_) {}
 
+  // Merge localStorage
   try {
     const local = localStorage.getItem('clipvault');
     if (local) {
       const parsed = JSON.parse(local);
-      const map = new Map(clips.map(c => [c.id, c]));
-      parsed.forEach(c => map.set(c.id, c));
+      const map = new Map(clips.map(c=>[c.id,c]));
+      (parsed.clips||parsed||[]).forEach(c=>map.set(c.id,c));
       clips = [...map.values()];
+      if (parsed.banners) mergeBanners(parsed.banners);
     }
   } catch(_) {}
 
-  render();
+  updateDataLists();
+  renderView();
 })();
 
-function save() { localStorage.setItem('clipvault', JSON.stringify(clips)); }
-
-// ══ RENDER ══
-function render() {
-  renderFilters();
-  renderClips();
-  document.getElementById('clip-count').textContent = clips.length + ' CLIPS';
-  const animes = [...new Set(clips.map(c => c.anime))];
-  const chars  = [...new Set(clips.map(c => c.character))];
-  document.getElementById('anime-datalist').innerHTML = animes.map(a => `<option value="${h(a)}">`).join('');
-  document.getElementById('char-datalist').innerHTML  = chars.map(c  => `<option value="${h(c)}">`).join('');
+function mergeBanners(b) {
+  if (b.anime)     Object.assign(banners.anime,     b.anime);
+  if (b.character) Object.assign(banners.character, b.character);
 }
 
-function renderFilters() {
-  document.getElementById('anime-filters').innerHTML = mkFilters(groupCount(clips,'anime'), 'anime');
-  document.getElementById('char-filters').innerHTML  = mkFilters(groupCount(clips,'character'), 'char');
-  document.getElementById('scene-filters').innerHTML = mkFilters(groupCount(clips,'scene'), 'scene');
+function save() {
+  localStorage.setItem('clipvault', JSON.stringify({ banners, clips }));
 }
 
-function groupCount(arr, key) {
-  const m = {};
-  arr.forEach(c => m[c[key]] = (m[c[key]]||0)+1);
-  return Object.entries(m).sort((a,b)=>b[1]-a[1]);
+// ══ DATALISTS ══
+function updateDataLists() {
+  const animes = [...new Set(clips.map(c=>c.anime))];
+  const chars  = [...new Set(clips.map(c=>c.character))];
+  document.getElementById('anime-datalist').innerHTML = animes.map(a=>`<option value="${h(a)}">`).join('');
+  document.getElementById('char-datalist').innerHTML  = chars.map(c=>`<option value="${h(c)}">`).join('');
+  document.getElementById('clip-count').textContent   = clips.length + ' CLIPS';
 }
 
-function mkFilters(entries, type) {
-  if (!entries.length) return `<div class="filter-item" style="opacity:.3;font-size:11px">—</div>`;
-  return entries.map(([v,n]) =>
-    `<div class="filter-item ${activeFilters[type]===v?'active':''}" onclick="toggleFilter('${type}','${a(v)}')">${h(v)}<span class="filter-count">${n}</span></div>`
-  ).join('');
+// ══ VIEW ROUTER ══
+// view: 'home' | 'chars' | 'clips' | 'search'
+function renderView() {
+  if (searchMode) { renderSearch(); return; }
+  if (!activeFilters.anime) renderHome();
+  else if (!activeFilters.char) renderChars();
+  else renderClips();
+  renderBreadcrumb();
 }
 
-function toggleFilter(type, val) {
-  activeFilters[type] = activeFilters[type] === val ? null : val;
-  renderFilters(); renderClips();
+// ══ BREADCRUMB ══
+function renderBreadcrumb() {
+  const bc = document.getElementById('breadcrumb');
+  const parts = [];
+
+  parts.push(`<span class="bc-item ${!activeFilters.anime&&!searchMode?'active':''}" onclick="goHome()">ALL ANIME</span>`);
+
+  if (activeFilters.anime) {
+    parts.push(`<span class="bc-sep">›</span>`);
+    parts.push(`<span class="bc-item ${!activeFilters.char?'active':''}" onclick="goChars()">${h(activeFilters.anime)}</span>`);
+  }
+  if (activeFilters.char) {
+    parts.push(`<span class="bc-sep">›</span>`);
+    parts.push(`<span class="bc-item active">${h(activeFilters.char)}</span>`);
+  }
+  if (searchMode) {
+    parts.push(`<span class="bc-sep">›</span>`);
+    parts.push(`<span class="bc-item active">SEARCH RESULTS</span>`);
+  }
+  bc.innerHTML = parts.join('');
 }
 
-function clearFilters() {
-  activeFilters = { anime: null, char: null, scene: null };
-  document.getElementById('search-input').value = '';
-  renderFilters(); renderClips();
+function goHome()  { activeFilters={anime:null,char:null}; searchMode=false; document.getElementById('search-input').value=''; renderView(); }
+function goChars() { activeFilters.char=null; searchMode=false; renderView(); }
+
+function onSearch() {
+  const q = document.getElementById('search-input').value.trim();
+  if (q) { searchMode=true; renderView(); renderBreadcrumb(); }
+  else   { searchMode=false; renderView(); }
 }
 
-function renderClips() {
-  const q    = document.getElementById('search-input').value.toLowerCase();
-  const grid = document.getElementById('clip-grid');
-  const filtered = clips.filter(c => {
-    if (activeFilters.anime && c.anime     !== activeFilters.anime) return false;
-    if (activeFilters.char  && c.character !== activeFilters.char)  return false;
-    if (activeFilters.scene && c.scene     !== activeFilters.scene) return false;
-    if (q) {
-      const hay = [c.anime,c.character,c.name,c.scene,...(c.tags||[])].join(' ').toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
-    return true;
-  });
-  if (!filtered.length) {
-    grid.innerHTML = `<div class="empty"><div class="empty-icon">◻</div><h3>NO CLIPS FOUND</h3><p>Try adjusting filters or add a new clip.</p></div>`;
+// ══ HOME — anime banner grid ══
+function renderHome() {
+  const main = document.getElementById('main-content');
+
+  // Collect unique animes that have clips
+  const animeNames = [...new Set(clips.map(c=>c.anime))].sort();
+
+  if (!animeNames.length) {
+    main.innerHTML = `<div class="clip-grid"><div class="empty"><div class="empty-icon">🎬</div><h3>NO CLIPS YET</h3><p>Click + ADD or ⬆ BULK to start building your vault.</p></div></div>`;
     return;
   }
-  grid.innerHTML = filtered.map(clipCard).join('');
+
+  const countFor = name => clips.filter(c=>c.anime===name).length;
+
+  main.innerHTML = `
+    <div class="section-header">
+      <span class="section-title">SELECT ANIME</span>
+      <span class="section-count">${animeNames.length} SERIES</span>
+    </div>
+    <div class="banner-grid">
+      ${animeNames.map(name => {
+        const banner = banners.anime[name];
+        const count  = countFor(name);
+        return `<div class="banner-card" onclick="selectAnime('${a(name)}')">
+          ${banner
+            ? `<img class="banner-img" src="${a(banner)}" alt="${h(name)}" loading="lazy">`
+            : `<div class="banner-placeholder">🎌</div>`}
+          <div class="banner-overlay"></div>
+          <div class="banner-name">${h(name)}</div>
+          <div class="banner-clip-count">${count} CLIP${count!==1?'S':''}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
 }
 
+// ══ CHARS — character banner grid ══
+function renderChars() {
+  const main = document.getElementById('main-content');
+  const anime = activeFilters.anime;
+  const chars  = [...new Set(clips.filter(c=>c.anime===anime).map(c=>c.character))].sort();
+
+  const countFor = name => clips.filter(c=>c.anime===anime&&c.character===name).length;
+
+  main.innerHTML = `
+    <div class="section-header">
+      <span class="section-title">SELECT CHARACTER</span>
+      <span class="section-count">${chars.length} CHARACTER${chars.length!==1?'S':''}</span>
+    </div>
+    <div class="char-grid">
+      ${chars.map(name => {
+        const banner = banners.character[name];
+        const count  = countFor(name);
+        return `<div class="char-card" onclick="selectChar('${a(name)}')">
+          ${banner
+            ? `<img class="banner-img" src="${a(banner)}" alt="${h(name)}" loading="lazy" style="object-position:center top">`
+            : `<div class="banner-placeholder" style="font-size:48px">🧑</div>`}
+          <div class="banner-overlay"></div>
+          <div class="banner-name" style="font-size:12px">${h(name)}</div>
+          <div class="banner-clip-count">${count} CLIP${count!==1?'S':''}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function selectAnime(name) { activeFilters.anime=name; activeFilters.char=null; renderView(); }
+function selectChar(name)  { activeFilters.char=name; renderView(); }
+
+// ══ CLIPS grid ══
+function renderClips() {
+  const main = document.getElementById('main-content');
+  let filtered = clips.filter(c =>
+    c.anime     === activeFilters.anime &&
+    c.character === activeFilters.char
+  );
+
+  main.innerHTML = `
+    <div class="section-header">
+      <span class="section-title">CLIPS</span>
+      <span class="section-count">${filtered.length} CLIP${filtered.length!==1?'S':''}</span>
+    </div>
+    <div class="clip-grid">
+      ${filtered.length ? filtered.map(clipCard).join('') : emptyHTML('No clips for this character yet.')}
+    </div>`;
+}
+
+// ══ SEARCH ══
+function renderSearch() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  const main = document.getElementById('main-content');
+  const filtered = clips.filter(c => {
+    const hay = [c.anime,c.character,c.name,c.scene,...(c.tags||[])].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+  renderBreadcrumb();
+  main.innerHTML = `
+    <div class="section-header">
+      <span class="section-title">SEARCH: "${h(q)}"</span>
+      <span class="section-count">${filtered.length} RESULT${filtered.length!==1?'S':''}</span>
+    </div>
+    <div class="clip-grid">
+      ${filtered.length ? filtered.map(clipCard).join('') : emptyHTML('No clips matched your search.')}
+    </div>`;
+}
+
+// ══ CLIP CARD ══
 function clipCard(c) {
   const tags = (c.tags||[]).map(t=>`<span class="tag">${h(t)}</span>`).join('');
   return `<div class="clip-card">
@@ -512,9 +726,8 @@ function clipCard(c) {
       <div class="scene-badge">${h(c.scene)}</div>
     </div>
     <div class="clip-body">
-      <div class="clip-anime">${h(c.anime)}</div>
+      <div class="clip-anime">${h(c.anime)} · ${h(c.character)}</div>
       <div class="clip-name">${h(c.name)}</div>
-      <div class="clip-char">— ${h(c.character)}</div>
       ${tags?`<div class="clip-tags">${tags}</div>`:''}
       <div class="clip-actions">
         <a href="${a(c.url)}" download target="_blank" style="flex:1;text-decoration:none">
@@ -526,36 +739,40 @@ function clipCard(c) {
   </div>`;
 }
 
+function emptyHTML(msg) {
+  return `<div class="empty"><div class="empty-icon">◻</div><h3>NOTHING HERE</h3><p>${msg}</p></div>`;
+}
+
 function deleteClip(id) {
   if (!confirm('Remove this clip?')) return;
   clips = clips.filter(c=>c.id!==id);
-  save(); render();
+  save(); updateDataLists(); renderView();
 }
 
 // ══ VIDEO MODAL ══
 function openVideo(url, name) {
   document.getElementById('video-modal-title').textContent = name;
   const vp = document.getElementById('video-player');
-  vp.src = url; vp.play();
+  vp.src=url; vp.play();
   document.getElementById('video-modal').classList.add('open');
 }
 function closeVideoModal() {
   const vp = document.getElementById('video-player');
-  vp.pause(); vp.src = '';
+  vp.pause(); vp.src='';
   document.getElementById('video-modal').classList.remove('open');
 }
 document.addEventListener('keydown', e => {
-  if (e.key !== 'Escape') return;
+  if (e.key!=='Escape') return;
   closeVideoModal(); closeModal();
   if (!bulkRunning) closeBulkModal();
 });
 
-// ══ SINGLE MODAL ══
+// ══ SINGLE ADD MODAL ══
 function openModal()  { document.getElementById('add-modal').classList.add('open'); resetSingle(); }
 function closeModal() { document.getElementById('add-modal').classList.remove('open'); resetSingle(); }
 
 function resetSingle() {
-  ['f-anime','f-char','f-name','f-tags'].forEach(id=>document.getElementById(id).value='');
+  ['f-anime','f-char','f-name','f-tags','f-anime-banner','f-char-banner'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f-scene').selectedIndex=0;
   selectedFile=null;
   document.getElementById('drop-file-name').textContent='';
@@ -566,64 +783,57 @@ function resetSingle() {
   document.getElementById('drop-input').value='';
 }
 
-// ══ DROP ZONE HELPERS ══
-function dzOver(e, id)  { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
-function dzLeave(id)    { document.getElementById(id).classList.remove('drag-over'); }
-
+// ══ DROP HELPERS ══
+function dzOver(e,id)  { e.preventDefault(); document.getElementById(id).classList.add('drag-over'); }
+function dzLeave(id)   { document.getElementById(id).classList.remove('drag-over'); }
 function handleSingleDrop(e) {
   e.preventDefault(); dzLeave('drop-zone');
-  const f = e.dataTransfer.files[0];
-  if (f && isVideo(f)) setSingleFile(f);
-  else toast('Please drop a video file', 'error');
+  const f=e.dataTransfer.files[0];
+  if (f&&isVideo(f)) setSingleFile(f); else toast('Drop a video file','error');
 }
-function handleFileSelect(e) { if (e.target.files[0]) setSingleFile(e.target.files[0]); }
+function handleFileSelect(e) { if(e.target.files[0]) setSingleFile(e.target.files[0]); }
 function setSingleFile(f) {
-  selectedFile = f;
-  document.getElementById('drop-file-name').textContent = f.name;
+  selectedFile=f;
+  document.getElementById('drop-file-name').textContent=f.name;
   document.getElementById('drop-zone').classList.add('has-file');
   setSingleStatus('','');
 }
 
 // ══ CATBOX UPLOAD ══
 function xhrUpload(endpoint, file, onProgress) {
-  return new Promise((resolve, reject) => {
-    const fd = new FormData();
-    fd.append('reqtype', 'fileupload');
-    fd.append('fileToUpload', file);
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', endpoint);
-    xhr.upload.onprogress = e => { if (e.lengthComputable) onProgress(Math.round(e.loaded/e.total*100)); };
-    xhr.onload = () => {
-      const t = xhr.responseText.trim();
-      if (xhr.status===200 && t.startsWith('https://')) resolve(t);
-      else reject(new Error(t||`HTTP ${xhr.status}`));
-    };
-    xhr.onerror   = () => reject(new Error('Network error'));
-    xhr.ontimeout = () => reject(new Error('Timed out'));
-    xhr.timeout   = 180000;
+  return new Promise((resolve,reject)=>{
+    const fd=new FormData();
+    fd.append('reqtype','fileupload');
+    fd.append('fileToUpload',file);
+    const xhr=new XMLHttpRequest();
+    xhr.open('POST',endpoint);
+    xhr.upload.onprogress=e=>{ if(e.lengthComputable) onProgress(Math.round(e.loaded/e.total*100)); };
+    xhr.onload=()=>{ const t=xhr.responseText.trim(); if(xhr.status===200&&t.startsWith('https://')) resolve(t); else reject(new Error(t||`HTTP ${xhr.status}`)); };
+    xhr.onerror=()=>reject(new Error('Network error'));
+    xhr.ontimeout=()=>reject(new Error('Timed out'));
+    xhr.timeout=180000;
     xhr.send(fd);
   });
 }
-
 async function catboxUpload(file, onProgress) {
-  try   { return await xhrUpload(CATBOX_PROXY,  file, onProgress); }
-  catch (e) { console.warn('Proxy failed:', e.message); }
-  try   { return await xhrUpload(CATBOX_DIRECT, file, onProgress); }
-  catch (e) { throw new Error('Upload failed: ' + e.message); }
+  try   { return await xhrUpload(CATBOX_PROXY,  file, onProgress); } catch(e){ console.warn('Proxy:',e.message); }
+  try   { return await xhrUpload(CATBOX_DIRECT, file, onProgress); } catch(e){ throw new Error('Upload failed: '+e.message); }
 }
 
 // ══ SINGLE SUBMIT ══
 async function submitClip() {
-  const anime = document.getElementById('f-anime').value.trim();
-  const scene = document.getElementById('f-scene').value;
-  const char  = document.getElementById('f-char').value.trim();
-  const name  = document.getElementById('f-name').value.trim();
-  const tags  = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const anime       = document.getElementById('f-anime').value.trim();
+  const scene       = document.getElementById('f-scene').value;
+  const char        = document.getElementById('f-char').value.trim();
+  const name        = document.getElementById('f-name').value.trim();
+  const tags        = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const animeBanner = document.getElementById('f-anime-banner').value.trim();
+  const charBanner  = document.getElementById('f-char-banner').value.trim();
 
-  if (!anime||!scene||!char||!name) { toast('Please fill in all fields','error'); return; }
-  if (!selectedFile)                 { toast('Please select a video file','error'); return; }
+  if (!anime||!scene||!char||!name) { toast('Fill in all required fields','error'); return; }
+  if (!selectedFile)                 { toast('Select a video file','error'); return; }
 
-  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('submit-btn').disabled=true;
   setSingleStatus('UPLOADING...','');
   setSingleProgress(0,true);
 
@@ -631,9 +841,14 @@ async function submitClip() {
     const url = await catboxUpload(selectedFile, p=>setSingleProgress(p,true));
     setSingleStatus('✓ '+url,'success');
     setSingleProgress(100,true);
-    clips.unshift({ id:uid(), anime, scene, character:char, name, tags, url, added:new Date().toISOString() });
-    save(); render();
-    setTimeout(closeModal, 700);
+
+    // Save banners if provided
+    if (animeBanner) banners.anime[anime]         = animeBanner;
+    if (charBanner)  banners.character[char]      = charBanner;
+
+    clips.unshift({id:uid(),anime,scene,character:char,name,tags,url,added:new Date().toISOString()});
+    save(); updateDataLists(); renderView();
+    setTimeout(closeModal,700);
     toast('Saved: '+name,'success');
   } catch(err) {
     setSingleStatus('✕ '+err.message,'error');
@@ -643,29 +858,19 @@ async function submitClip() {
   }
 }
 
-function setSingleStatus(msg, type) {
-  const el = document.getElementById('upload-status');
-  el.textContent = msg;
-  el.className = 'upload-status'+(msg?' visible':'')+(type?' '+type:'');
+function setSingleStatus(msg,type) {
+  const el=document.getElementById('upload-status');
+  el.textContent=msg;
+  el.className='upload-status'+(msg?' visible':'')+(type?' '+type:'');
 }
-function setSingleProgress(pct, show) {
-  document.getElementById('progress-wrap').classList.toggle('visible', show);
-  document.getElementById('progress-bar').style.width = pct+'%';
+function setSingleProgress(pct,show) {
+  document.getElementById('progress-wrap').classList.toggle('visible',show);
+  document.getElementById('progress-bar').style.width=pct+'%';
 }
 
-// ══════════════════════
-// ══ BULK IMPORT ══
-// ══════════════════════
-
-function openBulkModal() {
-  document.getElementById('bulk-modal').classList.add('open');
-  resetBulk();
-}
-function closeBulkModal() {
-  if (bulkRunning) return;
-  document.getElementById('bulk-modal').classList.remove('open');
-  resetBulk();
-}
+// ══ BULK MODAL ══
+function openBulkModal()  { document.getElementById('bulk-modal').classList.add('open'); resetBulk(); }
+function closeBulkModal() { if(bulkRunning) return; document.getElementById('bulk-modal').classList.remove('open'); resetBulk(); }
 
 function resetBulk() {
   bulkQueue=[]; bulkRunning=false;
@@ -681,220 +886,156 @@ function resetBulk() {
   document.getElementById('bulk-cancel-btn').textContent='CANCEL';
 }
 
-// Handle folder drag-drop (uses FileSystem API to recurse into folders)
 async function handleBulkDrop(e) {
   e.preventDefault(); dzLeave('bulk-drop-zone');
-  const items = [...(e.dataTransfer.items||[])];
-  let files = [];
-
-  if (items.length && items[0].webkitGetAsEntry) {
+  const items=[...(e.dataTransfer.items||[])];
+  let files=[];
+  if (items.length&&items[0].webkitGetAsEntry) {
     for (const item of items) {
-      const entry = item.webkitGetAsEntry();
-      if (!entry) continue;
-      if (entry.isDirectory) {
-        const sub = await readDir(entry);
-        files = files.concat(sub);
-      } else if (entry.isFile) {
-        const f = await entryToFile(entry);
-        if (f) files.push(f);
-      }
+      const entry=item.webkitGetAsEntry(); if(!entry) continue;
+      if (entry.isDirectory) files=files.concat(await readDir(entry));
+      else if (entry.isFile) { const f=await entryToFile(entry); if(f) files.push(f); }
     }
-  } else {
-    files = [...e.dataTransfer.files];
-  }
-
-  const videos = files.filter(f => isVideo(f));
-  if (!videos.length) { toast('No video files found in drop','error'); return; }
+  } else { files=[...e.dataTransfer.files]; }
+  const videos=files.filter(f=>isVideo(f));
+  if (!videos.length) { toast('No video files found','error'); return; }
   addToQueue(videos);
-  toast(`Added ${videos.length} video${videos.length>1?'s':''} to queue`,'info');
+  toast(`Added ${videos.length} video${videos.length>1?'s':''}`,'info');
 }
-
 function handleBulkSelect(e) {
-  const videos = [...e.target.files].filter(f=>isVideo(f));
-  if (!videos.length) { toast('No video files selected','error'); return; }
-  addToQueue(videos);
-  e.target.value = '';
-  toast(`Added ${videos.length} video${videos.length>1?'s':''} to queue`,'info');
+  const videos=[...e.target.files].filter(f=>isVideo(f));
+  if(!videos.length){toast('No video files','error');return;}
+  addToQueue(videos); e.target.value='';
+  toast(`Added ${videos.length} video${videos.length>1?'s':''}`,'info');
 }
-
-// Recursively read a directory entry
 function readDir(dirEntry) {
-  return new Promise(resolve => {
-    const reader = dirEntry.createReader();
-    const all = [];
+  return new Promise(resolve=>{
+    const reader=dirEntry.createReader(); const all=[];
     function batch() {
-      reader.readEntries(async entries => {
-        if (!entries.length) { resolve(all); return; }
-        for (const e of entries) {
-          if (e.isFile) {
-            const f = await entryToFile(e);
-            if (f) all.push(f);
-          } else if (e.isDirectory) {
-            const sub = await readDir(e);
-            all.push(...sub);
-          }
+      reader.readEntries(async entries=>{
+        if(!entries.length){resolve(all);return;}
+        for(const e of entries){
+          if(e.isFile){const f=await entryToFile(e);if(f)all.push(f);}
+          else if(e.isDirectory){const s=await readDir(e);all.push(...s);}
         }
-        batch(); // readEntries may return partial results — must call again
-      }, () => resolve(all));
+        batch();
+      },()=>resolve(all));
     }
     batch();
   });
 }
-
-function entryToFile(fileEntry) {
-  return new Promise(r => fileEntry.file(f=>r(f), ()=>r(null)));
-}
-
-function isVideo(f) {
-  return f.type.startsWith('video/') || /\.(mp4|mkv|mov|avi|webm|flv|wmv|m4v|ts|vob)$/i.test(f.name);
-}
-
+function entryToFile(fe){return new Promise(r=>fe.file(f=>r(f),()=>r(null)));}
+function isVideo(f){return f.type.startsWith('video/')||/\.(mp4|mkv|mov|avi|webm|flv|wmv|m4v|ts|vob)$/i.test(f.name);}
 function addToQueue(files) {
-  files.forEach(f => {
-    const name = f.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g,' ').trim();
-    bulkQueue.push({ file:f, name, status:'pending', url:null, error:null });
+  files.forEach(f=>{
+    const name=f.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').trim();
+    bulkQueue.push({file:f,name,status:'pending',url:null,error:null});
   });
   renderQueue();
 }
-
 function renderQueue() {
-  const list = document.getElementById('queue-list');
-  const wrap = document.getElementById('bulk-queue');
-  if (!bulkQueue.length) { wrap.classList.remove('has-files'); list.innerHTML=''; return; }
+  const list=document.getElementById('queue-list');
+  const wrap=document.getElementById('bulk-queue');
+  if(!bulkQueue.length){wrap.classList.remove('has-files');list.innerHTML='';return;}
   wrap.classList.add('has-files');
-
-  list.innerHTML = bulkQueue.map((item,i) => `
+  list.innerHTML=bulkQueue.map((item,i)=>`
     <div class="queue-item ${item.status}" id="qi-${i}">
       <input class="queue-name-input" type="text" value="${h(item.name)}" id="qn-${i}"
         ${item.status!=='pending'?'disabled':''}
         oninput="bulkQueue[${i}].name=this.value">
       <span class="queue-status ${item.status}" id="qs-${i}">${statusLabel(item)}</span>
-      <button class="queue-remove" id="qr-${i}"
-        ${item.status!=='pending'?'disabled':''}
+      <button class="queue-remove" id="qr-${i}" ${item.status!=='pending'?'disabled':''}
         onclick="removeQueueItem(${i})">✕</button>
     </div>`).join('');
-
-  const pending = bulkQueue.filter(i=>i.status==='pending').length;
-  document.getElementById('bulk-footer-info').textContent =
-    bulkQueue.length + ' FILE' + (bulkQueue.length>1?'S':'') + ' QUEUED' +
-    (pending < bulkQueue.length ? ` (${pending} pending)` : '');
+  const pending=bulkQueue.filter(i=>i.status==='pending').length;
+  document.getElementById('bulk-footer-info').textContent=bulkQueue.length+' FILE'+(bulkQueue.length>1?'S':'')+' QUEUED'+(pending<bulkQueue.length?` (${pending} pending)`:'');
 }
-
-function statusLabel(item) {
-  if (item.status==='pending')   return 'PENDING';
-  if (item.status==='uploading') return 'UPLOADING...';
-  if (item.status==='done')      return '✓ DONE';
-  if (item.status==='failed')    return '✕ '+(item.error||'FAILED');
-  return '';
+function statusLabel(item){
+  if(item.status==='pending')  return 'PENDING';
+  if(item.status==='uploading')return 'UPLOADING...';
+  if(item.status==='done')     return '✓ DONE';
+  if(item.status==='failed')   return '✕ '+(item.error||'FAILED');
+  return'';
 }
-
-function updateQueueRow(i) {
-  const item = bulkQueue[i];
-  const row  = document.getElementById(`qi-${i}`);
-  const st   = document.getElementById(`qs-${i}`);
-  const inp  = document.getElementById(`qn-${i}`);
-  const btn  = document.getElementById(`qr-${i}`);
-  if (!row) return;
-  row.className = `queue-item ${item.status}`;
-  if (st)  { st.className=`queue-status ${item.status}`; st.textContent=statusLabel(item); }
-  if (inp) inp.disabled = item.status!=='pending';
-  if (btn) btn.disabled = item.status!=='pending';
+function updateQueueRow(i){
+  const item=bulkQueue[i];
+  const row=document.getElementById(`qi-${i}`); if(!row)return;
+  const st=document.getElementById(`qs-${i}`);
+  const inp=document.getElementById(`qn-${i}`);
+  const btn=document.getElementById(`qr-${i}`);
+  row.className=`queue-item ${item.status}`;
+  if(st){st.className=`queue-status ${item.status}`;st.textContent=statusLabel(item);}
+  if(inp)inp.disabled=item.status!=='pending';
+  if(btn)btn.disabled=item.status!=='pending';
 }
-
-function removeQueueItem(i) {
-  bulkQueue.splice(i,1);
-  renderQueue();
-}
+function removeQueueItem(i){bulkQueue.splice(i,1);renderQueue();}
 
 async function submitBulk() {
-  const anime = document.getElementById('b-anime').value.trim();
-  const scene = document.getElementById('b-scene').value;
-  const char  = document.getElementById('b-char').value.trim();
-  const tags  = document.getElementById('b-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
-
-  if (!anime||!scene||!char) { toast('Fill in Anime, Scene Type & Character first','error'); return; }
-
-  const pendingItems = bulkQueue.filter(i=>i.status==='pending');
-  if (!pendingItems.length) { toast('No pending files in queue','error'); return; }
-
-  bulkRunning = true;
-  document.getElementById('bulk-submit-btn').disabled = true;
-  document.getElementById('bulk-cancel-btn').textContent = 'CLOSE';
+  const anime=document.getElementById('b-anime').value.trim();
+  const scene=document.getElementById('b-scene').value;
+  const char=document.getElementById('b-char').value.trim();
+  const tags=document.getElementById('b-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if(!anime||!scene||!char){toast('Fill Anime, Scene Type & Character','error');return;}
+  const pending=bulkQueue.filter(i=>i.status==='pending');
+  if(!pending.length){toast('No pending files','error');return;}
+  bulkRunning=true;
+  document.getElementById('bulk-submit-btn').disabled=true;
+  document.getElementById('bulk-cancel-btn').textContent='CLOSE';
   document.getElementById('bulk-overall').classList.add('visible');
-
-  const total = pendingItems.length;
-  let done=0, failed=0;
-  updateBulkBar(0, total);
-
-  for (let i=0; i<bulkQueue.length; i++) {
-    const item = bulkQueue[i];
-    if (item.status !== 'pending') continue;
-
-    item.status = 'uploading';
-    updateQueueRow(i);
-    // Scroll item into view
-    document.getElementById(`qi-${i}`)?.scrollIntoView({ block:'nearest' });
-
-    try {
-      const url = await catboxUpload(item.file, p => {
-        const st = document.getElementById(`qs-${i}`);
-        if (st) st.textContent = `UPLOADING ${p}%`;
+  const total=pending.length; let done=0,failed=0;
+  updateBulkBar(0,total);
+  for(let i=0;i<bulkQueue.length;i++){
+    const item=bulkQueue[i]; if(item.status!=='pending')continue;
+    item.status='uploading'; updateQueueRow(i);
+    document.getElementById(`qi-${i}`)?.scrollIntoView({block:'nearest'});
+    try{
+      const url=await catboxUpload(item.file,p=>{
+        const st=document.getElementById(`qs-${i}`);
+        if(st)st.textContent=`UPLOADING ${p}%`;
       });
-      item.status='done'; item.url=url;
-      updateQueueRow(i);
-      clips.unshift({
-        id:uid(), anime, scene, character:char,
-        name: item.name || item.file.name,
-        tags, url, added:new Date().toISOString()
-      });
-      save(); render();
+      item.status='done';item.url=url;updateQueueRow(i);
+      clips.unshift({id:uid(),anime,scene,character:char,name:item.name||item.file.name,tags,url,added:new Date().toISOString()});
+      save();updateDataLists();renderView();
       done++;
-    } catch(err) {
-      item.status='failed';
-      item.error = err.message.length>36 ? err.message.substring(0,36)+'…' : err.message;
-      updateQueueRow(i);
-      failed++;
+    }catch(err){
+      item.status='failed';item.error=err.message.length>36?err.message.substring(0,36)+'…':err.message;
+      updateQueueRow(i);failed++;
     }
-
-    updateBulkBar(done+failed, total);
+    updateBulkBar(done+failed,total);
   }
-
-  bulkRunning = false;
-  const summary = `Done: ${done} saved${failed?`, ${failed} failed`:''}`;
-  document.getElementById('bulk-footer-info').textContent = summary;
-  toast(summary, done>0?'success':'error');
-  document.getElementById('bulk-cancel-btn').textContent = 'CLOSE';
+  bulkRunning=false;
+  const summary=`Done: ${done} saved${failed?`, ${failed} failed`:''}`;
+  document.getElementById('bulk-footer-info').textContent=summary;
+  toast(summary,done>0?'success':'error');
 }
-
-function updateBulkBar(current, total) {
-  const pct = total ? Math.round(current/total*100) : 0;
-  document.getElementById('bulk-bar').style.width = pct+'%';
-  document.getElementById('bulk-progress-label').textContent = `${current} / ${total}`;
+function updateBulkBar(current,total){
+  const pct=total?Math.round(current/total*100):0;
+  document.getElementById('bulk-bar').style.width=pct+'%';
+  document.getElementById('bulk-progress-label').textContent=`${current} / ${total}`;
 }
 
 // ══ EXPORT ══
 function exportJSON() {
-  const blob = new Blob([JSON.stringify(clips,null,2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'clips.json';
+  const blob=new Blob([JSON.stringify({banners,clips},null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='clips.json';
   a.click();
-  toast('clips.json exported — commit it to GitHub','success');
+  toast('clips.json exported — commit to GitHub','success');
 }
 
 // ══ TOAST ══
-function toast(msg, type='') {
-  const el = document.createElement('div');
-  el.className = 'toast '+type;
-  el.textContent = msg;
+function toast(msg,type=''){
+  const el=document.createElement('div');
+  el.className='toast '+type; el.textContent=msg;
   document.body.appendChild(el);
-  setTimeout(()=>el.remove(), 3500);
+  setTimeout(()=>el.remove(),3500);
 }
 
 // ══ UTILS ══
-function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
-function h(s='') { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function a(s='') { return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function h(s=''){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function a(s=''){return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
 </script>
 </body>
 </html>
